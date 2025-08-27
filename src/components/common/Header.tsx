@@ -209,7 +209,7 @@ const Header = () => {
 
   return (
     <header className="w-full border-b bg-primary">
-      <div className="max-w-6xl mx-auto px-4 h-28 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center">
             <Image
