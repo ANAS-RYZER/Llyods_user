@@ -65,7 +65,7 @@ const DocumetSign = () => {
               <div className="text-sm px-2 text-gray-500 leading-relaxed w-[956px]">
                 By proceeding, I agree to the {" "}
                 <span className="text-blue-600 cursor-pointer underline">Investment Terms, SPV Participation Agreement,</span> and{" "}
-                <span className="text-blue-600 cursor-pointer underline">Investor Onboarding Documents</span>. I also accept Ryzer’s {" "}
+                <span className="text-blue-600 cursor-pointer underline">Investor Onboarding Documents</span>. I also accept Lloyds {" "}
                 <span className="text-blue-600 cursor-pointer underline">
                     Terms of Use, Payment Terms,
                 </span>

@@ -90,13 +90,13 @@ export default function EmailDialog({ open, onOpenChange, onSubmit: submit }: Em
             <DialogContent className="w-full max-w-[1000px] h-[500px] p-4 rounded-xl" onInteractOutside={(e) => e.preventDefault()}>
 
                 <DialogHeader>
-                    <DialogTitle className="text-lg font-semibold">Welcome To Ryzer Platform</DialogTitle>
+                    <DialogTitle className="text-lg font-semibold">Welcome To Lloyds Platform</DialogTitle>
                 </DialogHeader>
                 <div className="flex items-center justify-center gap-8">
 
                     <div className="flex flex-col items-start px-4 py-4 space-y-6 -mt-16 flex-1">
                         <div className="flex items-start gap-3">
-                            <Image src="/RyzerTextLogo.svg" alt="Ryzer Logo" width={120} height={120} />
+                                <Image src="/LLyodsLogo.svg" alt="Lloyds Logo" width={120} height={120} />
                         </div>
 
                         <div className="w-full max-w-md space-y-2">

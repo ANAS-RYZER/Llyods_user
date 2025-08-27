@@ -84,8 +84,8 @@ export default function CustomerDetailsDialog({
                     {/* Left */}
                     <div className="flex flex-col space-y-6 w-full max-w-md">
                         <Image
-                            src="/RyzerTextLogo.svg"
-                            alt="Ryzer Logo"
+                            src="/LLyodsLogo.svg"
+                            alt="Llyods Logo"
                             width={120}
                             height={120}
                             className="mb-2"

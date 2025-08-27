@@ -28,9 +28,21 @@ import VeriffDialog from "../kyc/verifKycDialog";
 import useVerrifCreateSession from "@/hooks/kyc/international/useVerrifCreateSession";
 
 const Header = () => {
-
-
-  const [step, setStep] = useState<"email" | "otp" | "success" | "customer" | "created" | "verifyAadhar" | "AadharOTP" | "mobileOTP" | "mobile" | "userEntry" | "verifyPAN"| "veriffDialog" | null>(null);
+  const [step, setStep] = useState<
+    | "email"
+    | "otp"
+    | "success"
+    | "customer"
+    | "created"
+    | "verifyAadhar"
+    | "AadharOTP"
+    | "mobileOTP"
+    | "mobile"
+    | "userEntry"
+    | "verifyPAN"
+    | "veriffDialog"
+    | null
+  >(null);
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [otp, setOtp] = useState("");
@@ -38,22 +50,25 @@ const Header = () => {
   const [userId, setUserId] = useState("");
   const [aadhar, setAadhar] = useState("");
   const [mobile, setMobile] = useState("");
-  const [kycAcceptedDialog, setKycAcceptedDilaog] = useState(false)
+  const [kycAcceptedDialog, setKycAcceptedDilaog] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasShownCustomerDialog, setHasShownCustomerDialog] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { data: userData, loading, error, fetchData } = useUserDetails();
 
   const [name, setName] = useState("");
-     const  { createSeesion , loading : veriffLoading , error : veriffError } = useVerrifCreateSession();
-
+  const {
+    createSeesion,
+    loading: veriffLoading,
+    error: veriffError,
+  } = useVerrifCreateSession();
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const accessToken = window.sessionStorage?.getItem('accessToken');
-    const sessionId = window.sessionStorage?.getItem('sessionId');
-    const storedUserId = window.sessionStorage?.getItem('userId');
+    const accessToken = window.sessionStorage?.getItem("accessToken");
+    const sessionId = window.sessionStorage?.getItem("sessionId");
+    const storedUserId = window.sessionStorage?.getItem("userId");
     const isLoggedIn = !!(accessToken && sessionId);
     setIsAuthenticated(isLoggedIn);
 
@@ -81,12 +96,15 @@ const Header = () => {
       setKycAcceptedDilaog(true);
       localStorage.setItem("kycAcceptedDialogShown", "true");
     }
-
   }, [userData, hasShownCustomerDialog, userId]);
 
-   
-
-  const handleRequestOtp = ({ email, token }: { email: string; token: string }) => {
+  const handleRequestOtp = ({
+    email,
+    token,
+  }: {
+    email: string;
+    token: string;
+  }) => {
     setEmail(email);
     setToken(token);
     setStep("otp");
@@ -137,7 +155,6 @@ const Header = () => {
     }
   };
 
-
   const handleVerifyAadhar = ({ aadhar }: { aadhar: string }) => {
     setStep("AadharOTP");
     setAadhar(aadhar);
@@ -149,7 +166,7 @@ const Header = () => {
       // Refresh user data
       await fetchData();
       // Small delay to show loading state
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } catch (error) {
       console.error("Error refreshing user data:", error);
     } finally {
@@ -175,102 +192,65 @@ const Header = () => {
       setStep("verifyPAN");
     }
   };
-  
-  const handleVeriffSession = async()=>{
 
-      const response = await createSeesion(userData?.firstName , userData?.lastName);
-     if(response?.data?.sessionUrl)
-     {
-       window.open(response.data.sessionUrl);
+  const handleVeriffSession = async () => {
+    const response = await createSeesion(
+      userData?.firstName,
+      userData?.lastName
+    );
+    if (response?.data?.sessionUrl) {
+      window.open(response.data.sessionUrl);
     }
-  }
-  
-   
+  };
+
   if (loading && !userData) {
     return <HeaderSkeleton />;
   }
-
 
   return (
     <header className="w-full border-b bg-primary">
       <div className="max-w-6xl mx-auto px-4 h-28 flex items-center justify-between">
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center">
-            <Image src="/Llyods.png" alt="Ryzer" width={120} height={32} className="h-auto w-auto" />
+            <Image
+              src="/Llyods.png"
+              alt="Ryzer"
+              width={120}
+              height={32}
+              className="h-auto w-auto"
+            />
           </Link>
-          <nav className="hidden md:flex items-center space-x-6">{/* Add Nav Items Here */}</nav>
+          <nav className="hidden md:flex items-center space-x-6">
+            {/* Add Nav Items Here */}
+          </nav>
         </div>
 
         <div className="flex items-center justify-center gap-10 space-x-4">
-          {(!userData?._id || !window.sessionStorage?.getItem('accessToken') || !window.sessionStorage?.getItem('sessionId')) && (
-            <Button onClick={() => setStep("email")} className="px-6 bg-white text-primary">
+          {(!userData?._id ||
+            !window.sessionStorage?.getItem("accessToken") ||
+            !window.sessionStorage?.getItem("sessionId")) && (
+            <Button
+              onClick={() => setStep("email")}
+              className="px-6 bg-white hover:bg-white/80 text-primary"
+            >
               Login
             </Button>
           )}
 
+         
 
-          {userData?.country === 'India' && (
-            !userData.isMobileVerified ||
-              !userData.isAadhaarVerified ||
-              !userData.isPanVerified ? (
-              <Button
-                onClick={() => {
-                  if (!userData?.isMobileVerified) {
-                    setStep("mobile");
-                  } else if (!userData?.isAadhaarVerified) {
-                    setStep("verifyAadhar");
-                  } else if (!userData?.isPanVerified) {
-                    setStep("verifyPAN");
-                  }
-                }}
-                className="px-6"
-              >
-                Complete KYC
-              </Button>
-            ) : (
-              <div
-                // className={`flex items-center gap-2 px-4 py-2 rounded-md  text-sm font-medium ${userData.adminApprovalStatus === "Pending"
-                //   ? "bg-transparent border border-yellow-500 "
-                //   : userData.adminApprovalStatus === "Approved"
-                //     ? "bg-green-600"
-                //     : "bg-red-500"
-                //   }`}
-              >
-                {userData.adminApprovalStatus === "Pending" && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse" />
-                    <span className="text-yellow-500 text-md ">Approval Pending</span>
-                  </div>
-                )}
-            
-             
+          {userData &&
+            !userData?.kycCompleted &&
+            userData?.country !== "India" && (
+              <Button onClick={handleVeriffSession}>Complete Kyc</Button>
+            )}
 
-
-              </div>
-            )
-          )}
-           
-            {userData && !userData?.kycCompleted && userData?.country!== 'India' &&
-              (
-              <Button onClick={handleVeriffSession} >
-                 Complete Kyc
-              </Button>
-
-              )
-            }
-           
-
-
-          {userData?._id && window.sessionStorage?.getItem('accessToken') && window.sessionStorage?.getItem('sessionId') && (
-            <DropDown user={userData} />
-          )}
-
-
-
-
+          {userData?._id &&
+            window.sessionStorage?.getItem("accessToken") &&
+            window.sessionStorage?.getItem("sessionId") && (
+              <DropDown user={userData} />
+            )}
         </div>
-
-
       </div>
 
       <EmailDialog
@@ -321,7 +301,7 @@ const Header = () => {
         onContinue={() => handleClose()}
         email={email}
       />
-      <VerifyMobile
+      {/* <VerifyMobile
         open={step === "mobile"}
         onOpenChange={(open) => !open && handleClose()}
         onSubmit={handleRequestMobileOtp}
@@ -352,7 +332,6 @@ const Header = () => {
         open={step === "verifyPAN"}
         onOpenChange={(open) => !open && handleClose()}
         onSubmit={handleKYCComplete}
-
       />
       {/* <KycAcceptedDialog
         open={kycAcceptedDialog}
@@ -360,36 +339,38 @@ const Header = () => {
        
         }}
       /> */}
-      <VeriffDialog 
-         open={step === 'veriffDialog'}
-         onOpenChange={(open) => {
-  if (!open) handleClose();
-}}
-
-      />
-
+      {/* <VeriffDialog
+        open={step === "veriffDialog"}
+        onOpenChange={(open) => {
+          if (!open) handleClose();
+        }} */}
+      {/* />  */}
 
       {/* Loading Overlay */}
       {isRefreshing && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-8 flex flex-col items-center space-y-4">
             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <p className="text-lg font-medium text-gray-900">Updating your profile...</p>
-            <p className="text-sm text-gray-500">Please wait while we refresh your information</p>
+            <p className="text-lg font-medium text-gray-900">
+              Updating your profile...
+            </p>
+            <p className="text-sm text-gray-500">
+              Please wait while we refresh your information
+            </p>
           </div>
         </div>
       )}
-        {veriffLoading &&
-        (
-         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+      {veriffLoading && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-8 flex flex-col items-center space-y-4">
             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <p className="text-lg font-medium text-gray-900">Naviagate to Complete kyc page u can use Mobiel or Laptop ...</p>
+            <p className="text-lg font-medium text-gray-900">
+              Naviagate to Complete kyc page u can use Mobiel or Laptop ...
+            </p>
             <p className="text-sm text-gray-500">Please wait .....</p>
           </div>
-
         </div>
-        )}
+      )}
     </header>
   );
 };

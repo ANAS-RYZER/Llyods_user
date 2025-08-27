@@ -106,7 +106,7 @@ export default function OtpDialog({
                 <div className="flex items-center justify-start gap-8">
                     {/* Left */}
                     <div className="flex flex-col m-8 space-y-4 flex-1">
-                        <Image src="/RyzerTextLogo.svg" alt="Ryzer Logo" width={120} height={120} />
+                        <Image src="/LLyodsLogo.svg" alt="Lloyds Logo" width={120} height={120} />
 
                         <div>
                             <h1 className="text-xl font-semibold">Enter Email OTP</h1>

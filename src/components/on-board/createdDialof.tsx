@@ -33,7 +33,7 @@ export default function CreatedDialog({ open, onOpenChange, onContinue , email }
         <div className="flex items-center justify-start gap-8">
           {/* Left */}
           <div className="flex items-center justify-center flex-col m-6 space-y-4 flex-1">
-            <Image src="/RyzerTextLogo.svg" alt="Ryzer Logo" width={120} height={120} />
+            <Image src="/LLyodsLogo.svg" alt="Lloyds Logo" width={120} height={120} />
 
             <div className="w-32 h-32 md:w-32 md:h-32  rounded-full bg-transparent  items-center justify-center">
 

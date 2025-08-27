@@ -101,17 +101,17 @@ const ProjectNav = ({ onSearch, searchQuery }: { onSearch: (query: string) => vo
               onClick={() => handleTabChange(item.id)}
               className="w-32 min-w-max flex flex-col items-center justify-center"
             >
-              <div className={`flex flex-row items-center justify-center  gap-1 py-4 ${activeTab === item.id ? "border-b-2 border-purple-500" : "border-b-2 border-b-transparent"}`}>
+              <div className={`flex flex-row items-center justify-center  gap-1 py-4 ${activeTab === item.id ? "border-b-2 border-primary" : "border-b-2 border-b-transparent"}`}>
                 <span
                   className={`duration-300 linear transition-all 
-                            ${activeTab === item.id ? "text-purple-500" : "text-gray-500"}`}
+                            ${activeTab === item.id ? "text-primary" : "text-gray-500"}`}
                 >
                   {item.icon}
                 </span>
                 <span
                   className={`text-sm duration-300 linear transition-all ${
                     activeTab === item.id
-                      ? "font-semibold text-purple-500"
+                      ? "font-semibold text-primary"
                       : "text-gray-600"
                   }`}
                 >

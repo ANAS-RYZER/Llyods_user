@@ -29,15 +29,15 @@ export default function UserEntryDialog({ open, onOpenChange, onContinue , name 
       <DialogContent className="w-full max-w-[450px] p-4 rounded-xl" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold" >
-              <Image src="/RyzerTextLogo.svg" alt="Ryzer Logo" width={120} height={120} />
+              <Image src="/LLyodsLogo.svg" alt="Lloyds Logo" width={120} height={120} />
             </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col  items-center justify-center">
             <h1 className="text-lg font-semibold" >
-                Welcome to Ryzer, {name}
+                Welcome to Lloyds, {name}
             </h1>
             <p className="text-sm text-center text-muted-foreground" >
-                Your Journey to Smarter Investing starts now . Let &apos;s explore what you can do with Ryzer.
+                Your Journey to Smarter Investing starts now . Let &apos;s explore what you can do with Lloyds.
                 </p>
         
         </div>
