@@ -23,6 +23,7 @@ import { toTitleCase } from "@/lib/format.utility"
 import FandoraCrew from "@/components/cards/BudgetCard/FandoraCrew"
 import dynamic from "next/dynamic"
 import { InfoIcon } from "@/components/common/InfoIcon"
+import { truncate } from "fs"
 const FandoraCard = dynamic(() => import("@/components/cards/RyzerCard"), { ssr: false });
 
 
@@ -112,7 +113,7 @@ export const KeyHighlights = ({ keyHighlights }: { keyHighlights: IKeyHighlights
             label="Projected IRR"
             value={
               <>
-                {Math.round(keyHighlights?.irr)}%{" "}
+                {keyHighlights?.irr.toFixed(2)}%{" "}
                 <span className="text-blue-700 text-sm font-bold">P.A.</span>
               </>
             }
