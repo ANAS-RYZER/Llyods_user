@@ -225,7 +225,7 @@ export default function AssetCard({ property }: PropertyCardProps) {
         <div className="mt-1 flex items-center gap-2 ">
           <MapPin size={16} className="text-gray-500" />
           <span className="text-sm font-medium text-gray-500">
-            {property?.landmark + " " + property?.city + " "}
+            {property?.landmark + " " }
           </span>
         </div>
 
@@ -263,7 +263,7 @@ export default function AssetCard({ property }: PropertyCardProps) {
               />
             </div>
             <span className="text-base font-semibold">
-              {formatCurrency(property?.totalPropertyValueAfterFees)}
+              {formatCurrencyWithOutZero(property?.totalPropertyValueAfterFees)}
             </span>
           </div>
         </div>
