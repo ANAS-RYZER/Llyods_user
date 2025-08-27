@@ -112,7 +112,7 @@ export const KeyHighlights = ({ keyHighlights }: { keyHighlights: IKeyHighlights
             label="Projected IRR"
             value={
               <>
-                {keyHighlights?.irr}%{" "}
+                {Math.round(keyHighlights?.irr)}%{" "}
                 <span className="text-blue-700 text-sm font-bold">P.A.</span>
               </>
             }
