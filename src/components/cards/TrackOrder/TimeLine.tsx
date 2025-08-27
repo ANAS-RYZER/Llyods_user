@@ -19,7 +19,7 @@ interface TimelineItemProps {
 export const TimelineItem = ({ title, description, status, isLast, timestamp, deadline, isDocument  }: TimelineItemProps) => {
   // const iconColor = {
   //   completed: "bg-[#52c1b9]",
-  //   current: "bg-[#725aec]",
+  //   current: "bg-[#0eb57b]",
   //   pending: "bg-[#eef1f6]",
   // }[status]
 
@@ -73,7 +73,7 @@ export const TimelineItem = ({ title, description, status, isLast, timestamp, de
         <Icon />
         <div className="flex-1 ">
           <div className="flex items-center justify-between mb-1">
-            <h3 className={`font-semibold ${status === "current" ? "text-[#725aec]" : ""}`}>{title}</h3>
+            <h3 className={`font-semibold ${status === "current" ? "text-[#0eb57b]" : ""}`}>{title}</h3>
            
           {
             isDocument && 

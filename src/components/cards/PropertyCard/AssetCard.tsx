@@ -281,7 +281,7 @@ export default function AssetCard({ property }: PropertyCardProps) {
         </div>
 
         <Button
-          className="mt-3 w-full  border-[#725AEC] hover:bg-[#725AEC] hover:text-white py-4 rounded-lg"
+          className="mt-3 w-full  border-[#0eb57b] hover:bg-[#0eb57b] hover:text-white py-4 rounded-lg"
           variant="outline"
           onClick={() => router.push(`/property/${property._id}`)}
         >

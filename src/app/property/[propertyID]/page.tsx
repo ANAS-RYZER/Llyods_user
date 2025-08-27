@@ -117,11 +117,11 @@ const PropertyPage = () => {
             <div className="hidden p-0 lg:flex w-full justify-between items-center">
               <TabsTrigger
                 value="growth"
-                className=" data-[state=active]:bg-[#725AEC] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <ChartColumn size={16} />
-                  <span className="data-[state=active]:text-[#725AEC]">
+                  <span className="data-[state=active]:text-[#0eb57b]">
                     Growth
                   </span>
                 </p>
@@ -129,11 +129,11 @@ const PropertyPage = () => {
 
               <TabsTrigger
                 value="overview"
-                className=" data-[state=active]:bg-[#725AEC] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <ChartLine size={16} />
-                  <span className="data-[state=active]:text-[#725AEC]">
+                  <span className="data-[state=active]:text-[#0eb57b]">
                     Overview
                   </span>
                 </p>
@@ -141,11 +141,11 @@ const PropertyPage = () => {
 
               <TabsTrigger
                 value="documents"
-                className=" data-[state=active]:bg-[#725AEC] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <FileText size={16} />
-                  <span className="data-[state=active]:text-[#725AEC]">
+                  <span className="data-[state=active]:text-[#0eb57b]">
                     Documents
                   </span>
                 </p>
@@ -153,11 +153,11 @@ const PropertyPage = () => {
 
               <TabsTrigger
                 value="faqs"
-                className=" data-[state=active]:bg-[#725AEC] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <MessagesSquare size={16} />
-                  <span className="data-[state=active]:text-[#725AEC]">
+                  <span className="data-[state=active]:text-[#0eb57b]">
                     FAQ&apos;s
                   </span>
                 </p>

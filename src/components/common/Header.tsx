@@ -192,18 +192,18 @@ const Header = () => {
 
 
   return (
-    <header className="w-full border-b bg-white">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <header className="w-full border-b bg-primary">
+      <div className="max-w-6xl mx-auto px-4 h-28 flex items-center justify-between">
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center">
-            <Image src="/RyzerTextLogo.svg" alt="Ryzer" width={120} height={32} className="h-auto w-auto" />
+            <Image src="/Llyods.png" alt="Ryzer" width={120} height={32} className="h-auto w-auto" />
           </Link>
           <nav className="hidden md:flex items-center space-x-6">{/* Add Nav Items Here */}</nav>
         </div>
 
         <div className="flex items-center justify-center gap-10 space-x-4">
           {(!userData?._id || !window.sessionStorage?.getItem('accessToken') || !window.sessionStorage?.getItem('sessionId')) && (
-            <Button onClick={() => setStep("email")} className="px-6">
+            <Button onClick={() => setStep("email")} className="px-6 bg-white text-primary">
               Login
             </Button>
           )}

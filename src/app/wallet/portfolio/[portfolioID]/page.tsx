@@ -72,41 +72,41 @@ const PortfolioDetails = () => {
                                 <div className="hidden p-0 lg:flex w-full justify-between items-center">
                                     <TabsTrigger
                                         value="growth"
-                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#725AEC] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#0eb57b] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
                                     >
                                         <p className="flex items-center gap-2">
                                             <Coins size={16} />
-                                            <span className='data-[state=active]:text-[#725AEC]'>Tokens</span>
+                                            <span className='data-[state=active]:text-[#0eb57b]'>Tokens</span>
                                         </p>
                                     </TabsTrigger>
 
                                     <TabsTrigger
                                         value="overview"
-                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#725AEC] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#0eb57b] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
                                     >
                                         <p className="flex items-center gap-2">
                                             <FileText size={16} />
-                                            <span className='data-[state=active]:text-[#725AEC]'>My Order</span>
+                                            <span className='data-[state=active]:text-[#0eb57b]'>My Order</span>
                                         </p>
                                     </TabsTrigger>
 
                                     <TabsTrigger
                                         value="documents"
-                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#725AEC] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#0eb57b] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
                                     >
                                         <p className="flex items-center gap-2">
                                             <FileText size={16} />
-                                            <span className='data-[state=active]:text-[#725AEC]'>Documents</span>
+                                            <span className='data-[state=active]:text-[#0eb57b]'>Documents</span>
                                         </p>
                                     </TabsTrigger>
 
                                     <TabsTrigger
                                         value="faqs"
-                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#725AEC] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                                        className="data-[state=active]:bg-[#EEF2FF] data-[state=active]:shadow-none data-[state=active]:text-[#0eb57b] text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
                                     >
                                         <p className="flex items-center gap-2">
                                             <Clock size={16} />
-                                            <span className='data-[state=active]:text-[#725AEC]'>Activity</span>
+                                            <span className='data-[state=active]:text-[#0eb57b]'>Activity</span>
                                         </p>
                                     </TabsTrigger>
                                 </div>

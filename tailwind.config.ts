@@ -21,14 +21,14 @@
 					foreground: 'hsl(var(--popover-foreground))'
 				},
 				primary: {
-					DEFAULT: '#725AEC',
+					DEFAULT: '#0eb57b',
 					foreground: '#FFFFFF'
 				},
 				secondary: {
 					DEFAULT: '#ffffff',
 					foreground: '#52C1B9'
 				},
-				fprimary: '#725AEC',
+				fprimary: '#0eb57b',
 				fsecondary: '#52C1B9',
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',

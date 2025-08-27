@@ -334,7 +334,7 @@ export default function TokenSelectingDialog({
           </div>
 
           <Button
-            className="text-md w-full bg-[#725AEC]  text-white flex items-center justify-center gap-2"
+            className="text-md w-full bg-[#0eb57b]  text-white flex items-center justify-center gap-2"
             onClick={() => onSubmit()}
           >
             Next <ArrowRight size={16} />

@@ -191,7 +191,7 @@ const DocumentSignature = ({ order: orderData }: any) => {
                   }
                 }
               }}
-              className="  border-2 border-[#725AEC] text-[#725AEC] hover:text-white hover:bg-primary"
+              className="  border-2 border-[#0eb57b] text-[#0eb57b] hover:text-white hover:bg-primary"
             >
               {isSigned
                 ? "Download"

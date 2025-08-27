@@ -17,7 +17,7 @@ export default function WalletPage() {
             <div className="flex w-full justify-between items-center">
               <TabsTrigger
                 value="wallet"
-                className="flex-1 data-[state=active]:bg-[#725AEC] data-[state=active]:text-white text-base font-medium py-3 px-4 m-0.5 rounded-md transition-all duration-300"
+                className="flex-1 data-[state=active]:bg-[#0eb57b] data-[state=active]:text-white text-base font-medium py-3 px-4 m-0.5 rounded-md transition-all duration-300"
               >
                 <span className="flex items-center justify-center gap-2">
                   Wallet
@@ -26,7 +26,7 @@ export default function WalletPage() {
 
               <TabsTrigger
                 value="portfolio"
-                className="flex-1 data-[state=active]:bg-[#725AEC] data-[state=active]:text-white text-base font-medium py-3 px-4 m-0.5 rounded-md transition-all duration-300"
+                className="flex-1 data-[state=active]:bg-[#0eb57b] data-[state=active]:text-white text-base font-medium py-3 px-4 m-0.5 rounded-md transition-all duration-300"
               >
                 <span className="flex items-center justify-center gap-2">
                   Portfolio

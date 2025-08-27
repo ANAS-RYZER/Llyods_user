@@ -203,7 +203,7 @@ export default function PortfolioDashboard() {
                   <span className="text-[#9ea3ae]">Gross yield</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#725aec]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#0eb57b]"></div>
                   <span className="text-[#9ea3ae]">Net yield</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -228,7 +228,7 @@ export default function PortfolioDashboard() {
                     <Line
                       type="monotone"
                       dataKey="netYield"
-                      stroke="#725aec"
+                      stroke="#0eb57b"
                       strokeWidth={2}
                       dot={false}
                     />
