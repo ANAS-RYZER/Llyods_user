@@ -101,7 +101,7 @@ export default function AssetCard({ property }: PropertyCardProps) {
   //     address.length - 4
   //   )}`;
   // };
-
+  console.log(property);
   const returns = property.investmentPerformance?.grossTargetIRR || 0;
   const formattedReturns = `${returns}%`;
 

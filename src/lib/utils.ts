@@ -138,7 +138,7 @@ export function formatBytes(bytes: number, decimals = 2) {
 }
 
 export const formatCurrency = (value: number) => {
-  return isNaN(value) ? '€ 0' : value.toLocaleString('en-IN', { style: 'currency', currency: 'EUR' }).replace('€', '€ ')
+  return isNaN(value) ? '€ 0' : value.toLocaleString('en-US', { style: 'currency', currency: 'EUR' }).replace('€', '€ ')
 }
 
 export const formatCurrencyWithOutZero = (value: number) => {

@@ -48,10 +48,8 @@ const SORT_OPTIONS: SortOption[] = [
 ];
 const sort_by_city: SortOption[] = [
   { value: "all", label: "All" },
-  { value: "hyderbad", label: "Hyderbad" },
-  { value: "mumbai", label: "Mumbai" },
-  { value: "banglore", label: "Banglore" },
-  { value: "delhi", label: "Delhi" },
+  { value: "BIR", label: "BIR" },
+  { value: "MIA", label: "MIA" }
 ]
 const sort_by_new: SortOption[] = [
   { value: "active-assets", label: "Active Assets", icon: <Clock className="text-blue-500" size={16} /> },
