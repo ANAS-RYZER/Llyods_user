@@ -2,11 +2,11 @@ import Header from "@/components/common/Header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: `Project Overview - Ryzer`,
+  title: `Project Overview - Lloyds`,
   description: "DEMOCRATISING CONTENT IP INVESTMENTS. Don't just Consume Content, Co-Own it",
   icons: {
     icon: [
-      { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+      { rel: 'icon', type: 'image/svg+xml', url: '/LLyodsLogo.svg' },
     ]
   }
 };

@@ -16,8 +16,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Image 
-              src="/Ryzer-Logo.svg" 
-              alt="Fandora" 
+              src="/LLyodsLogo.svg" 
+              alt="Lloyds" 
               width={120} 
               height={32} 
               className="h-auto w-auto"

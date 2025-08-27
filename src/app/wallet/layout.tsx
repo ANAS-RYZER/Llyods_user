@@ -9,21 +9,20 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Ryzer",
-    default: "Ryzer Orders",
+    template: "%s | Llyods",
+    default: "Llyods Orders",
   },
-  description: "Ryzer Orders",
+  description: "Llyods Orders",
   icons: {
     icon: [
-      { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+      { rel: 'icon', type: 'image/svg+xml', url: '/LLyodsLogo.svg' },
     ]
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Ryzer Wallet",
-    description: "Ryzer Wallet",
-    url: "https://ryzer.app",
-    siteName: "Ryzer",
+    title: "Lloyds Wallet",
+    description: "Lloyds Wallet",
+    siteName: "Lloyds",
     type: "website",
   },
 };
@@ -41,3 +40,4 @@ export default function RootLayout({
     </div>
   );
 }
+  

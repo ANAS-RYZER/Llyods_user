@@ -9,8 +9,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Ryzer",
-    default: "Explore Projects | Ryzer",
+      template: "%s | Lloyds",
+    default: "Explore Projects | Lloyds",
   },
   description: "Discover investment opportunities in films, music, web series, and sports through fractional ownership of intellectual property (IP). Co-own content and be part of the creative economy.",
   keywords: [
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Explore Projects | Ryzer",
+    title: "Explore Projects | Lloyds",
     description: "Invest in intellectual property (IP) of films, music, web series, and sports. Participate in fractional ownership and co-own creative projects.",
-    url: "https://ryzer.app",
-    siteName: "Ryzer",
+    // url: "https://Llyods.app",
+    siteName: "Lloyds",
     type: "website",
   },
 };

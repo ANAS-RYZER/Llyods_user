@@ -20,7 +20,7 @@ export default function Web3AuthDemo() {
     
     try {
       setIsSigning(true);
-      const message = "Hello from Ryzer Platform! This is a test message.";
+      const message = "Hello from Lloyds Platform! This is a test message.";
       const signature = await signMessage({ message });
       toast.success("Message signed successfully!");
       console.log("Message:", message);

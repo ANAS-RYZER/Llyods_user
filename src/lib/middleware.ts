@@ -14,6 +14,6 @@
 
 // export const config = {
 //   matcher: [
-//     '/((?!api|_next/static|_next/image|favicon.ico|signin).*)',
+//     '/((?!api|_next/static|_next/image|LLyodsLogo.ico|signin).*)',
 //   ],
 // }

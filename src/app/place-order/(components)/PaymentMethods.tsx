@@ -83,12 +83,12 @@ const PaymentMethods = ({ totalOrderValue ,  }: { totalOrderValue: number }) => 
           >
             <CreditCard size={15} /> Using by Fiat Currency
           </TabsTrigger>
-          <TabsTrigger
+          {/* <TabsTrigger
             className="flex-1 text-sm py-2 flex items-center gap-2"
             value="crypto_method"
           >
             <Bitcoin size={15} /> Using by Crypto
-          </TabsTrigger>
+          </TabsTrigger> */}
         </TabsList>
         <TabsContent value="fiat_method">
           <div className="flex flex-col">

@@ -10,15 +10,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Ryzer",
-    default: "Ryzer ~ RWA Fractional Investment Platform",
+    template: "%s | Lloyds",
+    default: "Lloyds ~ RWA Fractional Investment Platform",
   },
   description: "Welcome to Ryzer, a platform that democratises RWA investments through fractional ownership. Invest in real-world assets like real estate, art, and collectibles with minimal capital.",
   keywords: [
     "RWA investment platform",
     "fractional ownership",
     "real world assets",
-    "tokenized assets",
     "digital fractional ownership",
     "investment democratization",
     "fractional investing",
@@ -38,31 +37,31 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+      { rel: 'icon', type: 'image/svg+xml', url: '/LLyodsLogo.svg' },
     ],
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Ryzer ~ RWA Fractional Investment Platform",
-    description: "Join Ryzer to access fractional ownership in real-world assets (RWA). Invest in real estate, art, collectibles and more with minimal capital through our innovative tokenization platform.",
-    url: "https://ryzer.app",
-    siteName: "Ryzer",
+    title: "Lloyds ~ RWA Fractional Investment Platform",
+    description: "Join Lloyds to access fractional ownership in real-world assets (RWA). Invest in real estate, art, collectibles and more with minimal capital through our innovative tokenization platform.",
+    // url: "https://ryzer.app",
+    siteName: "Lloyds",
     type: "website",
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Ryzer - RWA Fractional Investment Platform'
+        alt: 'Lloyds - RWA Fractional Investment Platform'
       }
     ],
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ryzer ~ RWA Fractional Investment Platform',
+    title: 'Lloyds ~ RWA Fractional Investment Platform',
     description: 'Democratizing access to real-world asset investments through fractional ownership and tokenization.',
-    images: ['/twitter-image.jpg'],
+    images: ['/twitter-image.png'],
   },
   robots: {
     index: true,

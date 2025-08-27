@@ -9,21 +9,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Ryzer",
-    default: "Ryzer Orders",
+    template: "%s | Lloyds",
+    default: "Lloyds Orders",
   },
-  description: "Ryzer Orders",
+  description: "Lloyds Orders",
   icons: {
     icon: [
-      { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+      { rel: 'icon', type: 'image/svg+xml', url: '/LLyodsLogo.svg' },
     ]
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Ryzer Orders",
-    description: "Ryzer Orders",
-    url: "https://ryzer.app",
-    siteName: "Ryzer",
+    title: "Lloyds Orders",
+    description: "Lloyds Orders",
+    // url: "https://Lloyds.app",
+    siteName: "Lloyds",
     type: "website",
   },
 };

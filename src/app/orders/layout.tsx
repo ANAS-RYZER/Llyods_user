@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: "Ryzer Orders",
   icons: {
     icon: [
-      { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+      { rel: 'icon', type: 'image/svg+xml', url: '/LLyodsLogo.svg' },
     ]
   },
   manifest: "/manifest.json",

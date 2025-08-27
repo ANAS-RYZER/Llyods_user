@@ -61,7 +61,7 @@ const LLyodsCard: React.FC<LLyodsCardProps> = ({ add, onToggle }) => {
         <LockKeyholeIcon size={25} className="text-green-600" />
         <div className="text-green-600 space-y-1">
           <h1 className="text-md">
-            Ryzer platform is using Escrow accounts for Fiat currency
+            Lloyds platform is using Escrow accounts for Fiat currency
           </h1>
           <p className="text-sm">
             payments are 100% safe with Regulated custodial providers
@@ -69,7 +69,7 @@ const LLyodsCard: React.FC<LLyodsCardProps> = ({ add, onToggle }) => {
         </div>
       </div>
       <p className="text-xs">
-        I accept Ryzer's{" "}
+        I accept Lloyds's{" "}
         <span className="font-semibold underline cursor-pointer">
           Terms of Use, Payment Terms,
         </span>{" "}
@@ -79,7 +79,7 @@ const LLyodsCard: React.FC<LLyodsCardProps> = ({ add, onToggle }) => {
         </span>
         . I understand that my investment represents fractional ownership in a
         Special Purpose Vehicle (SPV) and may involve certain risks. I authorize
-        Ryzer and its partners to process my payment and manage related
+        Lloyds and its partners to process my payment and manage related
         documentation for this investment.
       </p>
     </div>
