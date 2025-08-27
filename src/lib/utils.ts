@@ -142,7 +142,8 @@ export const formatCurrency = (value: number) => {
 }
 
 export const formatCurrencyWithOutZero = (value: number) => {
-    return isNaN(value) ? '€ 0' : `€ ${Math.round(value).toLocaleString('en-IN')}`}
+    return isNaN(value) ? '€ 0' : `€ ${Math.round(value).toLocaleString('en-US')}`
+}
 
 export const formatPercentage = (value: number) => {
   return isNaN(value) ? '0%' : `${value.toFixed(1)}%`
