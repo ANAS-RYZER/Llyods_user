@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  DollarSign,
+  PoundSterling,
   FileText,
   Handshake,
   Scale,
@@ -37,18 +37,22 @@ interface IProperty {
   tokenPrice: number;
 }
 
-const formatCurrencyDisplay = (amount: number) => {
-  if (amount >= 10000000) {
-    return `₹${(amount / 10000000).toFixed(1)}Cr`;
-  } else if (amount >= 100000) {
-    return `₹${(amount / 100000).toFixed(1)}L`;
+const formatCurrencyDisplay = (amount: number): string => {
+  if (amount >= 1_000_000_000_000) {
+    return `£ ${(amount / 1_000_000_000_000).toFixed(1)}T`;
+  } else if (amount >= 1_000_000_000) {
+    return `£ ${(amount / 1_000_000_000).toFixed(1)}B`;
+  } else if (amount >= 1_000_000) {
+    return `£ ${(amount / 1_000_000).toFixed(1)}M`;
+  } else if (amount >= 1_000) {
+    return `£ ${(amount / 1_000).toFixed(1)}K`;
   } else {
-    return `₹${amount.toLocaleString("en-IN")}`;
+    return `£ ${amount.toLocaleString("en-US")}`;
   }
 };
 
 const formatCurrencyFull = (amount: number) => {
-  return `₹${amount.toLocaleString("en-IN")}.00`;
+  return `£ ${amount.toLocaleString("en-US")}.00`;
 };
 
 const Costing = ({
@@ -119,7 +123,7 @@ const Costing = ({
       amount: basePropertyValue,
       displayAmount: formatCurrencyDisplay(basePropertyValue),
       fullAmount: formatCurrencyFull(basePropertyValue),
-      icon: DollarSign,
+      icon: PoundSterling,
       color: "#77c49e",
     },
     {
@@ -219,10 +223,7 @@ const Costing = ({
               {costData.map((item) => {
                 const IconComponent = item.icon;
                 return (
-                  <Card
-                    key={item.id}
-                    className="border shadow-none bg-white"
-                  >
+                  <Card key={item.id} className="border shadow-none bg-white">
                     <CardContent className="p-2">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -313,10 +314,7 @@ const Costing = ({
                               value: number,
                               name: string,
                               props: any
-                            ) => [
-                              `${value.toLocaleString()}`, 
-                              name,
-                            ]}
+                            ) => [`${value.toLocaleString()}`, name]}
                             contentStyle={{
                               backgroundColor: "white",
                               border: "1px solid #ddd",

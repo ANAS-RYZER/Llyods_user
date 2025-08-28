@@ -5,16 +5,16 @@ import { StatsGrid } from "./components/StatsGrid";
 import { BalanceTable } from "./components/BalanceTable";
 import { TransactionList } from "./components/TransactionList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+// import {}
 // This would come from your API
 const mockData = {
   totalBalance: "$1,000,000.00",
   apy: 18,
   stats: {
-    available: '€375,000',
-    upcomingEarnings: '€24,000',
-    pnl24h: '+€1,240',
-    rewards: '+€18,900',
+    available: "£375,000",
+    upcomingEarnings: "£24,000",
+    pnl24h: "+£1,240",
+    rewards: "+£18,900",
   },
   balances: [
     {
@@ -24,7 +24,7 @@ const mockData = {
       available: 125000,
       inEarn: 25000,
       total: 150000,
-      fiatValue: '€150,000',
+      fiatValue: "£150,000",
     },
     {
       asset: "US Dollar",
@@ -38,12 +38,12 @@ const mockData = {
   ],
   transactions: [
     {
-      type: 'deposit' as const,
-      asset: 'INR',
-      amount: '+ €50,000',
-      status: 'completed' as const,
-      date: '2025-08-20 14:02',
-      explorerLink: '#',
+      type: "deposit" as const,
+      asset: "INR",
+      amount: "+ £50,000",
+      status: "completed" as const,
+      date: "2025-08-20 14:02",
+      explorerLink: "#",
     },
     {
       type: "yield" as const,
@@ -70,12 +70,12 @@ const mockData = {
       explorerLink: "#",
     },
     {
-      type: 'transfer' as const,
-      asset: 'INR',
-      amount: '- €10,000',
-      status: 'failed' as const,
-      date: '2025-08-22 18:40',
-      explorerLink: '#',
+      type: "transfer" as const,
+      asset: "INR",
+      amount: "- £10,000",
+      status: "failed" as const,
+      date: "2025-08-22 18:40",
+      explorerLink: "#",
     },
   ],
 };

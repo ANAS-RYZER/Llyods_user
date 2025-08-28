@@ -10,7 +10,9 @@ const Components = ({ orderData }: { orderData: any }) => {
       <CardContent className="p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">{orderData?.order?.property?.name}</h2>
+            <h2 className="text-xl font-semibold text-gray-900">
+              {orderData?.order?.property?.name}
+            </h2>
             <div className="flex items-center gap-2 text-gray-500">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               {orderData?.order?.status}
@@ -28,12 +30,21 @@ const Components = ({ orderData }: { orderData: any }) => {
         </div>
         <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <div className="text-lg font-medium">{orderData?.order?.number_of_token} Shares</div>
-            <div className="text-sm text-gray-500">(Per token: € {orderData?.order?.property?.token_amount})</div>
+            <div className="text-lg font-medium">
+              {orderData?.order?.number_of_token} Shares
+            </div>
+            <div className="text-sm text-gray-500">
+              (Per token: <PoundSterling />{" "}
+              {orderData?.order?.property?.token_amount})
+            </div>
           </div>
           <div className="text-right">
             <div className="text-sm text-gray-500">Your investment</div>
-            <div className="text-lg font-medium">€ {orderData?.order?.property?.token_amount * orderData?.order?.number_of_token}</div>
+            <div className="text-lg font-medium">
+              <PoundSterling />{" "}
+              {orderData?.order?.property?.token_amount *
+                orderData?.order?.number_of_token}
+            </div>
           </div>
         </div>
         <Button variant="link" className="mt-2 p-0 text-[#8968ff]">
@@ -41,8 +52,6 @@ const Components = ({ orderData }: { orderData: any }) => {
         </Button>
       </CardContent>
     </Card>
-
-
   );
 };
 

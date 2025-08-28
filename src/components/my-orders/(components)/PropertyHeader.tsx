@@ -9,7 +9,7 @@ import {
   ArrowUpRightIcon,
   Building2,
   CheckCircle,
-  DollarSign,
+  PoundSterling,
   PhoneCall,
   Shield,
 } from "lucide-react";
@@ -63,8 +63,8 @@ const PropertyHeader = ({
               />
             </div>
             <div className="flex justify-center gap-0   items-center bg-gray-300 rounded-r-full p-1  text-[12px] font-medium mr-2 pr-2 text-black">
-              <DollarSign size={12} /> {property?.tokenInformation?.tokenPrice}{" "}
-              Per Token
+              <PoundSterling size={12} />{" "}
+              {property?.tokenInformation?.tokenPrice} Per Token
             </div>
           </div>
           <Badge

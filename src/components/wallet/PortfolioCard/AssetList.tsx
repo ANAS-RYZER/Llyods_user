@@ -1,44 +1,52 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Search, Filter, Clock, ArrowUpRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Building2, LineChart, BarChart3 } from "lucide-react"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search, Filter, Clock, ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Building2, LineChart, BarChart3 } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 export function AssetList({ assets }: any) {
-  const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState("")
-  const [sortBy, setSortBy] = useState<"highest" | "lowest">("highest")
-  const [filterType, setFilterType] = useState<"all" | "realestate" | "fund" | "etf">("all")
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState<"highest" | "lowest">("highest");
+  const [filterType, setFilterType] = useState<
+    "all" | "realestate" | "fund" | "etf"
+  >("all");
 
   const filteredAssets = assets.filter((asset: any) => {
     const matchesSearch =
       asset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       asset.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      asset.location.city.toLowerCase().includes(searchQuery.toLowerCase())
+      asset.location.city.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesFilter =
       filterType === "all" ||
       (filterType === "realestate" && asset.type === "RealEstate") ||
       (filterType === "fund" && asset.type === "Fund") ||
-      (filterType === "etf" && asset.type === "ETF")
+      (filterType === "etf" && asset.type === "ETF");
 
-    return matchesSearch && matchesFilter
-  })
+    return matchesSearch && matchesFilter;
+  });
 
   const sortedAssets = [...filteredAssets].sort((a, b) => {
     if (sortBy === "highest") {
-      return b.change - a.change
+      return b.change - a.change;
     } else {
-      return a.change - b.change
+      return a.change - b.change;
     }
-  })
+  });
 
   return (
     <div className="space-y-6">
@@ -92,25 +100,24 @@ export function AssetList({ assets }: any) {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
 
-
 function AssetCard({ asset }: any) {
-  const router = useRouter()
+  const router = useRouter();
 
   const getAssetIcon = (type: string) => {
     switch (type) {
       case "RealEstate":
-        return <Building2 className="h-6 w-6 text-blue-500" />
+        return <Building2 className="h-6 w-6 text-blue-500" />;
       case "Fund":
-        return <LineChart className="h-6 w-6 text-purple-500" />
+        return <LineChart className="h-6 w-6 text-purple-500" />;
       case "ETF":
-        return <BarChart3 className="h-6 w-6 text-green-500" />
+        return <BarChart3 className="h-6 w-6 text-green-500" />;
       default:
-        return <Building2 className="h-6 w-6 text-gray-500" />
+        return <Building2 className="h-6 w-6 text-gray-500" />;
     }
-  }
+  };
 
   return (
     <>
@@ -123,7 +130,9 @@ function AssetCard({ asset }: any) {
               "bg-green-50": asset.type === "ETF",
             })}
           >
-            <div className="flex h-16 w-16 items-center justify-center">{getAssetIcon(asset.type)}</div>
+            <div className="flex h-16 w-16 items-center justify-center">
+              {getAssetIcon(asset.type)}
+            </div>
           </div>
 
           <div className="flex-1 p-6">
@@ -132,11 +141,17 @@ function AssetCard({ asset }: any) {
                 <div className="flex items-center gap-2">
                   <h3 className="font-medium text-gray-900">{asset.name}</h3>
                   <span
-                    className={cn("inline-flex items-center rounded-full px-3 py-1 text-xs font-medium", {
-                      "bg-blue-100 text-blue-700": asset.status === "Pre-Leased",
-                      "bg-amber-100 text-amber-700": asset.status === "Under Construction",
-                      "bg-green-100 text-green-700": asset.status === "Holiday Homes",
-                    })}
+                    className={cn(
+                      "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium",
+                      {
+                        "bg-blue-100 text-blue-700":
+                          asset.status === "Pre-Leased",
+                        "bg-amber-100 text-amber-700":
+                          asset.status === "Under Construction",
+                        "bg-green-100 text-green-700":
+                          asset.status === "Holiday Homes",
+                      }
+                    )}
                   >
                     {asset.status}
                   </span>
@@ -152,8 +167,8 @@ function AssetCard({ asset }: any) {
                 size="sm"
                 className="text-blue-600 hover:text-blue-700 font-medium p-0 h-auto flex items-center gap-1"
                 onClick={(e) => {
-                  e.preventDefault()
-                  router.push(`/wallet/portfolio/${asset.id}`)
+                  e.preventDefault();
+                  router.push(`/wallet/portfolio/${asset.id}`);
                 }}
               >
                 View Details
@@ -164,14 +179,22 @@ function AssetCard({ asset }: any) {
             <div className="mt-4 grid grid-cols-4 gap-8">
               <div>
                 <p className="text-sm text-gray-500 mb-1">You Invested</p>
-                <p className="font-medium">€{asset.invested.toLocaleString()}</p>
+                <p className="font-medium">
+                  <PoundSterling />
+                  {asset.invested.toLocaleString()}
+                </p>
               </div>
 
               <div>
                 <p className="text-sm text-gray-500 mb-1">Current Value</p>
                 <div className="flex items-center gap-2">
-                  <p className="font-medium">€{asset.currentValue.toLocaleString()}</p>
-                  <p className="text-sm text-green-600">+{asset.change.toFixed(1)}%</p>
+                  <p className="font-medium">
+                    <PoundSterling />
+                    {asset.currentValue.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-green-600">
+                    +{asset.change.toFixed(1)}%
+                  </p>
                 </div>
               </div>
 
@@ -197,8 +220,7 @@ function AssetCard({ asset }: any) {
         </div>
       </Card>
     </>
-  )
+  );
 }
 
 // Need to import these icons here to avoid errors
-

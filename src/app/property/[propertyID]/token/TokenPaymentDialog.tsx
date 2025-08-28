@@ -12,7 +12,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { ChartLine, ChevronDown } from "lucide-react";
+import { ChartLine, ChevronDown, PoundSterling } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { IProperty } from "@/constants/global";
@@ -51,7 +51,7 @@ export default function TokenPaymentDialog({
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const { placeOrder, loading, error } = usePlaceOrderApi();
   const [totalPriceInUSDT, setTotalPriceInUSDT] = useState(0);
-  const usdtRate = 85; // 1 USDT = €85
+  const usdtRate = 85; // 1 USDT = £85
 
   // const BINANCE_TRADE_STREAM_URL =
   //   "wss://stream.binance.com:9443/ws/usdtinr@trade";
@@ -252,7 +252,8 @@ export default function TokenPaymentDialog({
                       {totalPriceInUSDT} USDT
                     </h1>
                     <span className="text-sm text-gray-500">
-                      1 USDT = €{usdtRate}
+                      1 USDT = <PoundSterling />
+                      {usdtRate}
                     </span>
                   </div>
                   <div
@@ -344,7 +345,9 @@ export default function TokenPaymentDialog({
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="text-gray-600">€</span>
+                  <span className="text-gray-600">
+                    <PoundSterling />
+                  </span>
                   <span className="text-gray-700 text-md font-medium">
                     {property?.tokenInformation?.tokenPrice}
                   </span>
@@ -367,7 +370,9 @@ export default function TokenPaymentDialog({
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="text-gray-600">€</span>
+                  <span className="text-gray-600">
+                    <PoundSterling />
+                  </span>
                   <span className="text-gray-700 text-md font-medium">
                     {totalPrice}
                   </span>

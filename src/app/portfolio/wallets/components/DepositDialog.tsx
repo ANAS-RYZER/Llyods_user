@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -34,49 +34,49 @@ interface DepositDialogProps {
 
 const fiatMethods: PaymentMethod[] = [
   {
-    id: 'cashfree',
-    name: 'Cashfree',
-    description: 'For Indian users only',
-    amount: '€112,945',
-    fee: 'Platform fee (0.1%)',
-    icon: 'C',
+    id: "cashfree",
+    name: "Cashfree",
+    description: "For Indian users only",
+    amount: "£112,945",
+    fee: "Platform fee (0.1%)",
+    icon: "C",
   },
   {
-    id: 'stripe',
-    name: 'Stripe',
-    description: 'For global users',
-    amount: '€112,945',
-    fee: 'Platform fee (0.1%)',
-    icon: 'S',
+    id: "stripe",
+    name: "Stripe",
+    description: "For global users",
+    amount: "£112,945",
+    fee: "Platform fee (0.1%)",
+    icon: "S",
   },
   {
-    id: 'tazapay',
-    name: 'Tazapay',
-    description: 'For global users',
-    amount: '€112,945',
-    fee: 'Platform fee (0.1%)',
-    icon: 'T',
+    id: "tazapay",
+    name: "Tazapay",
+    description: "For global users",
+    amount: `£112,945`,
+    fee: "Platform fee (0.1%)",
+    icon: "T",
   },
 ];
 
 const cryptoOptions: CryptoOption[] = [
   {
-    symbol: 'RYZX',
-    name: 'RYZX',
-    amount: '1,500 RYZX',
-    fiatValue: '≈€82,500',
+    symbol: "RYZX",
+    name: "RYZX",
+    amount: "1,500 RYZX",
+    fiatValue: "≈£82,500",
   },
   {
-    symbol: 'USDT',
-    name: 'USDT',
-    amount: '1,500 USDT',
-    fiatValue: '≈€82,500',
+    symbol: "USDT",
+    name: "USDT",
+    amount: "1,500 USDT",
+    fiatValue: "≈£82,500",
   },
   {
-    symbol: 'USDC',
-    name: 'USDC',
-    amount: '1,500 USDC',
-    fiatValue: '≈€82,500',
+    symbol: "USDC",
+    name: "USDC",
+    amount: "1,500 USDC",
+    fiatValue: "≈£82,500",
   },
 ];
 
@@ -84,8 +84,8 @@ export const DepositDialog: React.FC<DepositDialogProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [selectedTab, setSelectedTab] = React.useState('fiat');
-  const [amount, setAmount] = React.useState('');
+  const [selectedTab, setSelectedTab] = React.useState("fiat");
+  const [amount, setAmount] = React.useState("");
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -97,7 +97,11 @@ export const DepositDialog: React.FC<DepositDialogProps> = ({
           </p>
         </DialogHeader>
 
-        <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
+        <Tabs
+          value={selectedTab}
+          onValueChange={setSelectedTab}
+          className="w-full"
+        >
           <TabsList className="grid w-full grid-cols-2 mb-4">
             <TabsTrigger value="fiat" className="flex items-center gap-2">
               <span className="text-sm">💳</span> Using Fiat
@@ -112,7 +116,9 @@ export const DepositDialog: React.FC<DepositDialogProps> = ({
               <div
                 key={method.id}
                 className={`flex items-center justify-between p-4 rounded-lg mb-2 border ${
-                  method.id === 'cashfree' ? 'bg-blue-50 border-blue-100' : 'hover:bg-gray-50'
+                  method.id === "cashfree"
+                    ? "bg-blue-50 border-blue-100"
+                    : "hover:bg-gray-50"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -121,7 +127,9 @@ export const DepositDialog: React.FC<DepositDialogProps> = ({
                   </div>
                   <div>
                     <h3 className="font-medium">{method.name}</h3>
-                    <p className="text-sm text-gray-500">{method.description}</p>
+                    <p className="text-sm text-gray-500">
+                      {method.description}
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -156,7 +164,9 @@ export const DepositDialog: React.FC<DepositDialogProps> = ({
                 </div>
                 <div className="text-right">
                   <div className="font-medium">{option.amount}</div>
-                  <div className="text-sm text-gray-500">{option.fiatValue}</div>
+                  <div className="text-sm text-gray-500">
+                    {option.fiatValue}
+                  </div>
                 </div>
               </div>
             ))}

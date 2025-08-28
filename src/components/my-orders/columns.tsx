@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { ChevronDown, ChevronRight } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+import { ColumnDef } from "@tanstack/react-table";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export type OrderStatus = "Success" | "Pending" | "Cancelled" | "Failed"
+export type OrderStatus = "Success" | "Pending" | "Cancelled" | "Failed";
 
 export type Order = {
-  id: string
-  projectName: string
-  orderDate: string
-  amount: number
-  statusDescription: string
-  status: OrderStatus
-}
+  id: string;
+  projectName: string;
+  orderDate: string;
+  amount: number;
+  statusDescription: string;
+  status: OrderStatus;
+};
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -28,7 +28,7 @@ export const columns: ColumnDef<Order>[] = [
           Project Name
           <ChevronDown className="ml-1 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -43,7 +43,7 @@ export const columns: ColumnDef<Order>[] = [
           Order Date
           <ChevronDown className="ml-1 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -58,11 +58,15 @@ export const columns: ColumnDef<Order>[] = [
           Amount
           <ChevronDown className="ml-1 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const amount = row.getValue("amount") as number
-      return <span>€ {amount.toLocaleString('en-IN')}</span>
+      const amount = row.getValue("amount") as number;
+      return (
+        <span>
+          <PoundSterling /> {amount.toLocaleString("en-IN")}
+        </span>
+      );
     },
   },
   {
@@ -77,7 +81,7 @@ export const columns: ColumnDef<Order>[] = [
           Status Description
           <ChevronDown className="ml-1 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -92,10 +96,10 @@ export const columns: ColumnDef<Order>[] = [
           Order Status
           <ChevronDown className="ml-1 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const status = row.getValue("status") as OrderStatus
+      const status = row.getValue("status") as OrderStatus;
       return (
         <div
           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
@@ -112,14 +116,13 @@ export const columns: ColumnDef<Order>[] = [
         >
           {status}
         </div>
-      )
+      );
     },
   },
   {
     id: "actions",
     cell: () => {
-      return <ChevronRight className="h-4 w-4 text-gray-400" />
+      return <ChevronRight className="h-4 w-4 text-gray-400" />;
     },
   },
-]
-
+];

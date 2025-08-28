@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import {
   ChevronDown,
-  DollarSign,
+  PoundSterling,
   Lock,
   Minus,
   Plus,
@@ -27,7 +27,7 @@ export default function YearlyReturnsTab({
   yearlyGrossYield,
   yearlyNetYield,
   ownerShipPercantage,
-  yearlyNetReturns
+  yearlyNetReturns,
 }: {
   fees: any[];
   orderCalculations: any;
@@ -48,28 +48,28 @@ export default function YearlyReturnsTab({
       <div className="grid grid-cols-2 py-1  gap-2 border-b border-gray-200 ">
         <CalculateReturns
           name="Gross Yield"
-          icon={<DollarSign size={12} />}
-          value={`€ ${yearlyGrossYield || "0"}`}
+          icon={<PoundSterling size={12} />}
+          value={`£ ${yearlyGrossYield || "0"}`}
           tooltip="This is Gross Yield"
         />
         <CalculateReturns
           name="Net Yield"
           icon={<TrendingUp size={12} />}
           color="#00966A"
-          value={`€ ${yearlyNetYield || "0"}`}
+          value={`£ ${yearlyNetYield || "0"}`}
           tooltip="This is Net Yield"
         />
-          <CalculateReturns
-            name="Ownership"
-            icon={<Users2Icon size={12} />}
+        <CalculateReturns
+          name="Ownership"
+          icon={<Users2Icon size={12} />}
           value={`${(Number(ownerShipPercantage) || 0).toFixed(2)}%`}
-            percent={true}
-          />
+          percent={true}
+        />
         <CalculateReturns
           name="Total Returns"
           icon={<Lock size={12} />}
           color="#00966A"
-          value={`€ ${yearlyNetReturns || "0"}`}
+          value={`£ ${yearlyNetReturns || "0"}`}
         />
       </div>
 
@@ -164,28 +164,26 @@ export default function YearlyReturnsTab({
               </span>
             </div>
             {fees?.map((fee) => {
-                const feeAmount = fee.isPercentage
-                  ? (orderCalculations.totalShareValue / 100) * fee.value
-                  : Number(fee.value);
-                return (
-                  <div
-                    key={fee._id}
-                    className="flex items-center p-2 justify-between"
-                  >
-                    <span className="text-gray-600 text-sm">
-                      {fee.name}
-                      <span className="ml-2">
-                        {fee.isPercentage
-                          ? `(${fee.value}%)`
-                          : `(${fee.value})`}
-                      </span>
+              const feeAmount = fee.isPercentage
+                ? (orderCalculations.totalShareValue / 100) * fee.value
+                : Number(fee.value);
+              return (
+                <div
+                  key={fee._id}
+                  className="flex items-center p-2 justify-between"
+                >
+                  <span className="text-gray-600 text-sm">
+                    {fee.name}
+                    <span className="ml-2">
+                      {fee.isPercentage ? `(${fee.value}%)` : `(${fee.value})`}
                     </span>
-                    <span className="text-sm font-medium">
-                      {formatCurrency(feeAmount)}
-                    </span>
-                  </div>
-                );
-              })}
+                  </span>
+                  <span className="text-sm font-medium">
+                    {formatCurrency(feeAmount)}
+                  </span>
+                </div>
+              );
+            })}
             <div className="flex items-center border-t border-gray-200 p-2 justify-between">
               <h1>Total Price</h1>
               <span className="text-md font-semibold">
