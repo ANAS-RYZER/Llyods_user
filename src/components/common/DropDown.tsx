@@ -74,7 +74,7 @@ const UserDropDown = ({ user }: { user: any }) => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="relative h-10 w-10 rounded-lg p-0 hover:bg-gray-100"
+          className="relative h-10 w-10 rounded-lg p-0 "
           aria-label="User Menu"
         >
           <Avatar className="h-10 w-10">

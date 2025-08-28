@@ -2,6 +2,7 @@
 import { InfoIcon } from "@/components/common/InfoIcon";
 import PaymentRadioButton from "./PaymentRadioButton";
 import React, { useEffect, useState } from "react";
+import { PoundSterling } from "lucide-react";
 
 const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
   const fiat_types = [
@@ -10,7 +11,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
       image: "/square-logo.png",
       name: "Square Up",
       note: "For Indian users only",
-      price: `€${totalOrderValue.toLocaleString("en-US")}`,
+      price: `£${totalOrderValue.toLocaleString("en-US")}`,
       fee: "Platform fee (0.1%)",
     },
     {
@@ -18,7 +19,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
       image: "/stripelogo.svg",
       name: "Stripe",
       note: "For Global users",
-      price: `€${totalOrderValue.toLocaleString("en-US")}`,
+      price: `£${totalOrderValue.toLocaleString("en-US")}`,
       fee: "Platform fee (0.1%)",
     },
     {
@@ -26,7 +27,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
       image: "/tazapaylogo.svg",
       name: "Tazapay",
       note: "For Global users",
-      price: `€${totalOrderValue.toLocaleString("en-US")}`,
+      price: `£${totalOrderValue.toLocaleString("en-US")}`,
       fee: "Platform fee (0.1%)",
     },
   ];
@@ -44,7 +45,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
           Payment methods
         </h1>
         <h1 className="text-xl font-semibold flex items-center gap-2">
-          €{totalOrderValue.toLocaleString("en-US")}
+          £{totalOrderValue.toLocaleString("en-US")}
           <span>
             <InfoIcon
               tooltip="dummy data"

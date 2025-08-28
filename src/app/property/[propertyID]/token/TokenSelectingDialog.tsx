@@ -31,7 +31,7 @@ import {
   IndianRupee,
   Bold,
   TrendingUpIcon,
-  Euro,
+  PoundSterling,
 } from "lucide-react";
 import { roundDownToOneDecimal } from "@/lib/utils";
 
@@ -224,7 +224,7 @@ export default function TokenSelectingDialog({
                   </div>
                   <div className="flex items-center gap-1">
                     {/* <IndianRupee size={14} className="text-gray-600" /> */}
-                    <Euro size={14} className="text-gray-600" />
+                    <PoundSterling size={14} className="text-gray-600" />
                     <span className="text-gray-700 font-medium">
                       {totalPrice}
                     </span>
@@ -246,13 +246,13 @@ export default function TokenSelectingDialog({
                             {fee?.name}
                           </span>
                           <span className="text-gray-500 text-sm">
-                            {fee?.isPercentage ? "%" : "€"}
+                            {fee?.isPercentage ? "%" : "£"}
                             {fee?.value}
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
                           {/* <IndianRupee size={14} className="text-gray-600" /> */}
-                          <Euro size={14} className="text-gray-600" />
+                          <PoundSterling size={14} className="text-gray-600" />
                           <span className="text-gray-700 font-medium">
                             {roundDownToOneDecimal(feeAmount)}
                           </span>
@@ -269,7 +269,7 @@ export default function TokenSelectingDialog({
               </span>
               <div className="flex items-center gap-1">
                 {/* <IndianRupee size={14} className="text-gray-600" /> */}
-                <Euro size={14} className="text-gray-600" />
+                <PoundSterling size={14} className="text-gray-600" />
                 <span className="text-gray-700 font-bold">{totalPrice}</span>
               </div>
             </div>

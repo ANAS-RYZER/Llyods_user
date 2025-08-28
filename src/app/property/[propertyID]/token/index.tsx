@@ -25,6 +25,8 @@ import MonthlyReturnsTab from "@/components/cards/PropertyCard/TokenTabs/Monthly
 import YearlyReturnsTab from "@/components/cards/PropertyCard/TokenTabs/YearlyReturnsTabs";
 import usePlaceOrderApi from "@/hooks/property/usePlaceOrderApi";
 import { toast } from "react-toastify";
+import useVerrifCreateSession from "@/hooks/kyc/international/useVerrifCreateSession";
+import useInvestorApi from "@/hooks/user/useInvestorApi";
 
 const TokenPaymentDialog = dynamic(() => import("./TokenPaymentDialog"), {
   ssr: false,
@@ -67,10 +69,21 @@ export default function Token({
     | "InvestmentSummary"
     | "email"
     | "otp"
+    | "customer"
     | null
   >(null);
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useInvestorApi();
 
   const isPlaceOrder = pathname.includes("place-order");
+  const {
+    createSeesion,
+    loading: veriffLoading,
+    error: veriffError,
+  } = useVerrifCreateSession();
 
   const { placeOrder, loading, error } = usePlaceOrderApi();
 
@@ -99,14 +112,14 @@ export default function Token({
     const platfromFee = updatedProperty?.fees.platform || [];
     const brokerageFee = updatedProperty?.fees.brokerage || [];
     const reservesFee = updatedProperty?.fees.reserve || [];
-    const insuranceFee  = updatedProperty?.fees.insurance || [];
+    const insuranceFee = updatedProperty?.fees.insurance || [];
     return [
       ...registrationFees,
       ...legalFees,
       ...platfromFee,
       ...brokerageFee,
       ...reservesFee,
-      ...insuranceFee
+      ...insuranceFee,
     ];
   }, [updatedProperty?.fees]);
 
@@ -132,7 +145,7 @@ export default function Token({
     const totalFees = fees.reduce((acc: number, fee: any) => {
       // Skip fees that are not active
       if (!fee.status) return acc;
-      
+
       return fee.isPercentage
         ? acc + (totalShareValue / 100) * Number.parseFloat(fee.value)
         : acc + Number.parseFloat(fee.value);
@@ -226,10 +239,9 @@ export default function Token({
       : null;
   const handleNavigate = useCallback(() => {
     if (accesToken) {
-      router.push(`/place-order/${params?.propertyID}`)
+      router.push(`/place-order/${params?.propertyID}`);
     }
   }, [accesToken]);
-
 
   // Monthly Gross Yield
   const monthGrossYield = useMemo(() => {
@@ -341,7 +353,15 @@ export default function Token({
       // Handle error appropriately, e.g., show a toast notification
     }
   };
-
+  const handleVeriffSession = async () => {
+    const response = await createSeesion(
+      userData?.firstName,
+      userData?.lastName
+    );
+    if (response?.data?.sessionUrl) {
+      window.open(response.data.sessionUrl);
+    }
+  };
   return (
     <>
       <div className="border border-gray-200 rounded-xl shadow-sm p-4 bg-white lg:w-[400px]">
@@ -448,9 +468,9 @@ export default function Token({
                   className="w-full font-semibold py-5 cursor-pointer"
                   onClick={async () => {
                     if (isPlaceOrder) {
-                      const res = await handleOrder(); 
-                      console.log(res)// wait for response
-                      if (res  && res.order._id) {
+                      const res = await handleOrder();
+                      console.log(res); // wait for response
+                      if (res && res.order._id) {
                         router.push(
                           `/place-order/${propertyId}/order/${res.order._id}`
                         );
@@ -464,13 +484,13 @@ export default function Token({
                 >
                   Let's Invest
                 </Button>
-              ) 
-              : (
+              ) : (
                 <Button
                   variant="primary"
                   disabled={!!tokenError}
                   className="w-full font-semibold py-5 cursor-pointer"
-                  onClick={() => setStep("TokenSelecting")}
+                  // onClick={() => setStep("")}
+                  onClick={handleVeriffSession}
                 >
                   Complete kyc to invest
                 </Button>

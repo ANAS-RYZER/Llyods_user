@@ -20,7 +20,7 @@ import {
   ArrowUpRight,
   StickyNoteIcon,
   Files,
-  Euro,
+  PoundSterling,
 } from "lucide-react";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -115,7 +115,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
     typeof property?.tokenInformation?.tokenPrice === "number"
       ? property.tokenInformation.tokenPrice
       : 0;
-  const currency = property?.currency === "INR" ? "€" : "$";
+  const currency = property?.currency === "INR" ? "£" : "$";
 
   // Placeholder for stage label
   const stageLabel =
@@ -163,7 +163,6 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
-
 
   const handleViewOnBlockchain = () => {
     const address = property?.tokenInformation?.blockchainProjectAddress;
@@ -304,7 +303,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
           <div className="bg-gray-100/80 rounded-md p-2">
             <div className="flex items-center gap-1 text-gray-500 mb-1 text-sm">
               {/* <IndianRupee size={12} className="flex-shrink-0" /> */}
-              <Euro size={12} className="flex-shrink-0" />
+              <PoundSterling size={12} className="flex-shrink-0" />
               <span>Per Token</span>
               <InfoIcon
                 className="ml-1 text-gray-400"
@@ -399,10 +398,9 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             <CreateAssetReview
               open={createOpen}
               onOpenChange={setCreateOpen}
-              onSubmitChange={() =>{
+              onSubmitChange={() => {
                 setCreateOpen(false);
-              }
-              }
+              }}
             />
           )}
         </div>

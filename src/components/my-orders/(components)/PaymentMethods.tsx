@@ -8,14 +8,14 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import PaymentRadioButton from "./PaymentRadioButton";
 
-const PaymentMethods = ({ totalOrderValue ,  }: { totalOrderValue: number }) => {
+const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
   const fiat_types = [
     {
       value: "square_up",
       image: "/square-logo.png",
       name: "Square Up",
       note: "For Indian users only",
-      price: ` €${totalOrderValue.toLocaleString("en-IN")}`,
+      price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
       fee: "Platform fee (0.1%)",
     },
     {
@@ -23,7 +23,7 @@ const PaymentMethods = ({ totalOrderValue ,  }: { totalOrderValue: number }) => 
       image: "/stripelogo.svg",
       name: "Stripe",
       note: "For Global users",
-      price:  ` €${totalOrderValue.toLocaleString("en-IN")}`,
+      price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
       fee: "Platform fee (0.1%)",
     },
     {
@@ -31,7 +31,7 @@ const PaymentMethods = ({ totalOrderValue ,  }: { totalOrderValue: number }) => 
       image: "/checkout-logo.jpeg",
       name: "Checkout",
       note: "For Global users",
-      price:  ` €${totalOrderValue.toLocaleString("en-IN")}`,
+      price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
       fee: "Platform fee (0.1%)",
     },
   ];
@@ -40,21 +40,21 @@ const PaymentMethods = ({ totalOrderValue ,  }: { totalOrderValue: number }) => 
       value: "ryzer_token",
       image: "/logo.svg",
       name: "RyzerX Tokens",
-      price: "€XXXXXXXX",
+      price: "£XXXXXXXX",
       fee: "-10000",
     },
     {
       value: "usdt",
       image: "/logo.svg",
       name: "USDT",
-      price: "€XXXXXXXX",
+      price: "£XXXXXXXX",
       fee: "-10000",
     },
     {
       value: "usdc",
       image: "/logo.svg",
       name: "USDE",
-      price: "€XXXXXXXX",
+      price: "£XXXXXXXX",
       fee: "-10000",
     },
   ];
@@ -69,22 +69,27 @@ const PaymentMethods = ({ totalOrderValue ,  }: { totalOrderValue: number }) => 
           Payment methods
         </h1>
         <h1 className="text-xl font-semibold flex items-center gap-2">
-          €{totalOrderValue.toLocaleString("en-IN")}
+          <PoundSterling />
+          {totalOrderValue.toLocaleString("en-IN")}
           <span>
-            <InfoIcon tooltip="dummy data" className="text-muted-foreground" size={14}/>
+            <InfoIcon
+              tooltip="dummy data"
+              className="text-muted-foreground"
+              size={14}
+            />
           </span>
         </h1>
       </div>
       <div className="flex flex-col">
-            {fiat_types.map((type) => (
-              <PaymentRadioButton
-                key={type.value}
-                selected={selected}
-                setSelected={setSelected}
-                {...type}
-              />
-            ))}
-          </div>
+        {fiat_types.map((type) => (
+          <PaymentRadioButton
+            key={type.value}
+            selected={selected}
+            setSelected={setSelected}
+            {...type}
+          />
+        ))}
+      </div>
       {/* <Tabs defaultValue="fiat_method" className="w-full">
         <TabsList className="flex bg-gray-200 h-15">
           <TabsTrigger

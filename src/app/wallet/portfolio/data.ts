@@ -1,11 +1,21 @@
-"use client"
+"use client";
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export type AssetType = "RealEstate" | "Fund" | "ETF" | "Stock" | "Bond" | "Crypto"
+export type AssetType =
+  | "RealEstate"
+  | "Fund"
+  | "ETF"
+  | "Stock"
+  | "Bond"
+  | "Crypto";
 
-export type AssetStatus = "Active" | "Pre-Leased" | "Under Construction" | "Holiday Homes"
+export type AssetStatus =
+  | "Active"
+  | "Pre-Leased"
+  | "Under Construction"
+  | "Holiday Homes";
 
 export type ActivityType =
   | "RentalIncome"
@@ -18,146 +28,146 @@ export type ActivityType =
   | "Report"
   | "Tenant"
   | "Governance"
-  | "Management"
+  | "Management";
 
 export type InvestmentAsset = {
-  id: string
-  name: string
-  
-  type: AssetType
-  status: AssetStatus
+  id: string;
+  name: string;
+
+  type: AssetType;
+  status: AssetStatus;
   location: {
-    city: string
-    state: string
-    country: string
-  }
-  invested: number
-  currentValue: number
-  change: number
+    city: string;
+    state: string;
+    country: string;
+  };
+  invested: number;
+  currentValue: number;
+  change: number;
   lockInPeriod: {
-    duration: number
-    unit: "days" | "months" | "years"
-  }
+    duration: number;
+    unit: "days" | "months" | "years";
+  };
   tokens: {
-    total: number
-    owned: number
-  }
-  tokenPrice: number
-  earnings: number
-  roi: number
+    total: number;
+    owned: number;
+  };
+  tokenPrice: number;
+  earnings: number;
+  roi: number;
   details?: {
-    propertyType?: string
-    builtUpArea?: string
-    occupancy?: string
-    annualYield?: string
-    spvModel?: boolean
-    issueType?: string
-    votingRights?: boolean
-    sharesIssued?: "In-Progress" | "Completed"
-  }
+    propertyType?: string;
+    builtUpArea?: string;
+    occupancy?: string;
+    annualYield?: string;
+    spvModel?: boolean;
+    issueType?: string;
+    votingRights?: boolean;
+    sharesIssued?: "In-Progress" | "Completed";
+  };
   tenants?: {
-    name: string
-    spacePercentage: number
-  }[]
+    name: string;
+    spacePercentage: number;
+  }[];
   assetManager?: {
-    id: string
-    name: string
-    title: string
-    role: string
-    experience: number
-    rating: number
-    reviewCount: number
-    location: string
-    languages: string[]
-    specializations: string[]
+    id: string;
+    name: string;
+    title: string;
+    role: string;
+    experience: number;
+    rating: number;
+    reviewCount: number;
+    location: string;
+    languages: string[];
+    specializations: string[];
     performance: {
-      overall: number
-      communication: number
-      propertyManagement: number
-      financialReporting: number
-      issueResolution: number
-    }
+      overall: number;
+      communication: number;
+      propertyManagement: number;
+      financialReporting: number;
+      issueResolution: number;
+    };
     reviews: {
-      id: string
-      author: string
-      rating: number
-      comment: string
-      date: string
-    }[]
-  }
+      id: string;
+      author: string;
+      rating: number;
+      comment: string;
+      date: string;
+    }[];
+  };
   activities: {
-    id: string
-    type: ActivityType
-    title: string
-    description: string
-    amount?: number
-    date: string
-    isNew?: boolean
-    details?: Record<string, any>
-  }[]
+    id: string;
+    type: ActivityType;
+    title: string;
+    description: string;
+    amount?: number;
+    date: string;
+    isNew?: boolean;
+    details?: Record<string, any>;
+  }[];
   upcomingEvents: {
-    id: string
-    type: "Meeting" | "Distribution"
-    title: string
-    date: string
-  }[]
+    id: string;
+    type: "Meeting" | "Distribution";
+    title: string;
+    date: string;
+  }[];
   documents?: {
-    id: string
-    name: string
-    type: string
-    url: string
-    date: string
-    verified?: boolean
-    verificationDate?: string
-  }[]
+    id: string;
+    name: string;
+    type: string;
+    url: string;
+    date: string;
+    verified?: boolean;
+    verificationDate?: string;
+  }[];
   additionalInfo: {
     escrowAccount?: {
-      name: string
-      website?: string
-    }
+      name: string;
+      website?: string;
+    };
     legalAdvisor?: {
-      name: string
-      website?: string
-    }
+      name: string;
+      website?: string;
+    };
     assetManagement?: {
-      name: string
-      website?: string
-    }
+      name: string;
+      website?: string;
+    };
     brokerage?: {
-      status: boolean
-    }
-  }
+      status: boolean;
+    };
+  };
   risks?: {
-    id: string
-    title: string
-    description: string
-    severity: "low" | "medium" | "high"
-  }[]
+    id: string;
+    title: string;
+    description: string;
+    severity: "low" | "medium" | "high";
+  }[];
   exitOpportunities?: {
-    id: string
-    title: string
-    description: string
-    timeline?: string
-    expectedReturn?: string
-  }[]
-}
+    id: string;
+    title: string;
+    description: string;
+    timeline?: string;
+    expectedReturn?: string;
+  }[];
+};
 
 export type PortfolioState = {
-  assets: InvestmentAsset[]
-  totalInvested: number
-  totalValue: number
-  totalEarned: number
-  totalTokens: number
-  totalAssets: number
-  averageGrowth: number
+  assets: InvestmentAsset[];
+  totalInvested: number;
+  totalValue: number;
+  totalEarned: number;
+  totalTokens: number;
+  totalAssets: number;
+  averageGrowth: number;
 
   // Actions
-  getAssetById: (id: string) => InvestmentAsset | undefined
-  markActivityAsSeen: (assetId: string, activityId: string) => void
-  castVote: (assetId: string, activityId: string, vote: boolean) => void
-  addAsset: (asset: InvestmentAsset) => void
-  updateAssetValue: (assetId: string, newValue: number) => void
-}
+  getAssetById: (id: string) => InvestmentAsset | undefined;
+  markActivityAsSeen: (assetId: string, activityId: string) => void;
+  castVote: (assetId: string, activityId: string, vote: boolean) => void;
+  addAsset: (asset: InvestmentAsset) => void;
+  updateAssetValue: (assetId: string, newValue: number) => void;
+};
 
 export const usePortfolioStore = create<PortfolioState>()(
   persist(
@@ -260,7 +270,7 @@ export const usePortfolioStore = create<PortfolioState>()(
               type: "Dividend",
               title: "Quarterly Dividend Distributed",
               description:
-                "A quarterly dividend of €12 per token (€5,400 total) has been distributed to all token holders.",
+                "A quarterly dividend of £12 per token (£5,400 total) has been distributed to all token holders.",
               date: "July 1, 2024",
               isNew: true,
               details: {
@@ -272,12 +282,12 @@ export const usePortfolioStore = create<PortfolioState>()(
               type: "Market",
               title: "Token Price Increased",
               description:
-                "Token price has increased by 5.2% from €550 to €578 based on recent market activity and property valuation.",
+                "Token price has increased by 5.2% from £550 to £578 based on recent market activity and property valuation.",
               date: "June 28, 2024",
               isNew: true,
               details: {
                 change: 5.2,
-                changeAmount: "€28",
+                changeAmount: "£28",
               },
             },
             {
@@ -417,21 +427,21 @@ export const usePortfolioStore = create<PortfolioState>()(
               title: "Rental Yield Risk",
               description:
                 "In finance, risk factors are the building blocks of investing that help explain the systematic returns in the market, and the possibility of losing money in investments. Disclosure to the exposures of risk factors and extent of the risks are the best way to evaluate your investment.",
-              severity: "medium"
+              severity: "medium",
             },
             {
               id: "risk-2",
               title: "Liquidity Risk",
               description:
                 "In finance, risk factors are the building blocks of investing that help explain the systematic returns in the market, and the possibility of losing money in investments. Disclosure to the exposures of risk factors and extent of the risks are the best way to evaluate your investment.",
-              severity: "high"
+              severity: "high",
             },
             {
               id: "risk-3",
               title: "Project Management Risk",
               description:
                 "In finance, risk factors are the building blocks of investing that help explain the systematic returns in the market, and the possibility of losing money in investments. Disclosure to the exposures of risk factors and extent of the risks are the best way to evaluate your investment.",
-              severity: "low"
+              severity: "low",
             },
           ],
           exitOpportunities: [
@@ -490,7 +500,8 @@ export const usePortfolioStore = create<PortfolioState>()(
               id: "activity-1",
               type: "ValuationUpdate",
               title: "Valuation Update",
-              description: "Fund valuation increased by 8.2% based on recent portfolio performance.",
+              description:
+                "Fund valuation increased by 8.2% based on recent portfolio performance.",
               date: "May 15, 2024",
               isNew: true,
             },
@@ -543,7 +554,8 @@ export const usePortfolioStore = create<PortfolioState>()(
               id: "activity-1",
               type: "DividendDistribution",
               title: "Dividend Distribution",
-              description: "Quarterly dividend of €225 has been credited to your wallet.",
+              description:
+                "Quarterly dividend of £225 has been credited to your wallet.",
               amount: 225,
               date: "June 5, 2024",
               isNew: true,
@@ -577,7 +589,7 @@ export const usePortfolioStore = create<PortfolioState>()(
       averageGrowth: 0,
 
       getAssetById: (id) => {
-        return get().assets.find((asset) => asset.id === id)
+        return get().assets.find((asset) => asset.id === id);
       },
 
       markActivityAsSeen: (assetId, activityId) => {
@@ -588,15 +600,15 @@ export const usePortfolioStore = create<PortfolioState>()(
                 ...asset,
                 activities: asset.activities.map((activity) => {
                   if (activity.id === activityId) {
-                    return { ...activity, isNew: false }
+                    return { ...activity, isNew: false };
                   }
-                  return activity
+                  return activity;
                 }),
-              }
+              };
             }
-            return asset
+            return asset;
           }),
-        }))
+        }));
       },
 
       castVote: (assetId, activityId, vote) => {
@@ -606,16 +618,19 @@ export const usePortfolioStore = create<PortfolioState>()(
               return {
                 ...asset,
                 activities: asset.activities.map((activity) => {
-                  if (activity.id === activityId && activity.type === "VoteRequired") {
-                    return { ...activity, isNew: false }
+                  if (
+                    activity.id === activityId &&
+                    activity.type === "VoteRequired"
+                  ) {
+                    return { ...activity, isNew: false };
                   }
-                  return activity
+                  return activity;
                 }),
-              }
+              };
             }
-            return asset
+            return asset;
           }),
-        }))
+        }));
       },
 
       addAsset: (asset) => {
@@ -625,15 +640,15 @@ export const usePortfolioStore = create<PortfolioState>()(
           totalInvested: state.totalInvested + asset.invested,
           totalValue: state.totalValue + asset.currentValue,
           totalTokens: state.totalTokens + asset.tokens.owned,
-        }))
+        }));
       },
 
       updateAssetValue: (assetId, newValue) => {
         set((state) => {
-          const asset = state.assets.find((a) => a.id === assetId)
-          if (!asset) return state
+          const asset = state.assets.find((a) => a.id === assetId);
+          if (!asset) return state;
 
-          const valueDiff = newValue - asset.currentValue
+          const valueDiff = newValue - asset.currentValue;
 
           return {
             assets: state.assets.map((a) => {
@@ -642,17 +657,17 @@ export const usePortfolioStore = create<PortfolioState>()(
                   ...a,
                   currentValue: newValue,
                   change: ((newValue - a.invested) / a.invested) * 100,
-                }
+                };
               }
-              return a
+              return a;
             }),
             totalValue: state.totalValue + valueDiff,
-          }
-        })
+          };
+        });
       },
     }),
     {
       name: "ryzer-portfolio-storage",
-    },
-  ),
-)
+    }
+  )
+);

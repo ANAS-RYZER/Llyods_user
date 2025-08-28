@@ -1,13 +1,12 @@
-
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card";
 
 interface PortfolioSummaryProps {
-  totalValue: number
-  totalInvested: number
-  totalEarned: number
-  averageGrowth: number
-  totalTokens: number
-  totalAssets: number
+  totalValue: number;
+  totalInvested: number;
+  totalEarned: number;
+  averageGrowth: number;
+  totalTokens: number;
+  totalAssets: number;
 }
 
 export function PortfolioSummary({
@@ -26,20 +25,28 @@ export function PortfolioSummary({
             <div>
               <p className="text-sm text-gray-400">Current value</p>
               <div className="flex items-center gap-2">
-                <h3 className="text-3xl font-semibold">€{totalValue.toLocaleString()}</h3>
-                <span className="rounded bg-[#15803D33] px-2 py-0.5 text-sm font-medium text-[#15803D]">0</span>
+                <h3 className="text-3xl font-semibold">
+                  <PoundSterling />
+                  {totalValue.toLocaleString()}
+                </h3>
+                <span className="rounded bg-[#15803D33] px-2 py-0.5 text-sm font-medium text-[#15803D]">
+                  0
+                </span>
               </div>
             </div>
             <div className="text-right">
               <p className="text-sm text-gray-400">Invested value</p>
-              <h3 className="text-3xl font-semibold">€{totalInvested.toLocaleString()}</h3>
+              <h3 className="text-3xl font-semibold">
+                <PoundSterling />
+                {totalInvested.toLocaleString()}
+              </h3>
             </div>
           </div>
 
           <div className="grid grid-cols-4 gap-4">
             <StatCard
               title="Total Earned"
-              value={`€${totalEarned.toLocaleString()}`}
+              value={`£${totalEarned.toLocaleString()}`}
               icon="$"
               bgColor="#C2410C33"
               iconBgColor="#C2410C"
@@ -69,15 +76,15 @@ export function PortfolioSummary({
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 interface StatCardProps {
-  title: string
-  value: string
-  icon: string
-  bgColor: string
-  iconBgColor: string
+  title: string;
+  value: string;
+  icon: string;
+  bgColor: string;
+  iconBgColor: string;
 }
 
 function StatCard({ title, value, icon, bgColor, iconBgColor }: StatCardProps) {
@@ -98,5 +105,5 @@ function StatCard({ title, value, icon, bgColor, iconBgColor }: StatCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

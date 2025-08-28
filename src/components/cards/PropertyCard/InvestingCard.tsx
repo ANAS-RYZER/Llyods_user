@@ -14,7 +14,7 @@ import {
   Star,
   ArrowUpLeftIcon,
   ArrowUpRightIcon,
-  DollarSign,
+  PoundSterling,
   LayoutGridIcon,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
@@ -22,7 +22,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { IconRight } from "react-day-picker";
-import { formatCurrency, formatCurrencyWithOutZero, formatDate, getFormattedVideoUrl } from "@/lib/utils";
+import {
+  formatCurrency,
+  formatCurrencyWithOutZero,
+  formatDate,
+  getFormattedVideoUrl,
+} from "@/lib/utils";
 import ProgressBar from "./ProgessBar";
 import PhotoDialog from "./PhotoDialog";
 import { InfoIcon } from "@/components/common/InfoIcon";
@@ -173,7 +178,7 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
                         <ArrowUpRightIcon size={16} />
                       </div>
                       <div className="flex justify-center    items-center bg-[#F1F6FF] rounded-r-full p-1  text-[12px] font-medium mr-2 text-[#2663EB] border-blue-20">
-                        <DollarSign size={12} />{" "}
+                        <PoundSterling size={12} />{" "}
                         {property.tokenInformation?.tokenPrice} Per Token
                       </div>
                     </div>
@@ -221,7 +226,9 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
                     </div>
                     <div className="text-right">
                       <div className="text-base font-semibold text-black">
-                        {formatCurrencyWithOutZero(property.totalPropertyValueAfterFees)}
+                        {formatCurrencyWithOutZero(
+                          property.totalPropertyValueAfterFees
+                        )}
                       </div>
                       <div className="text-sm text-gray-500">Asset Value</div>
                     </div>
@@ -237,21 +244,31 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
                     <div className="flex items-center gap-2">
                       <span>Last Transaction</span>
                       <Badge variant="outline" className="text-xs gap-4">
-                       {property?.lastTransaction?.tokensBooked} {property?.lastTransaction?.tokenSymbol}
-                       <img src={property?.lastTransaction?.avatar } alt="avatar" className="w-4 h-4 rounded-full" />
-                       <ArrowUpRightIcon size={16} />
+                        {property?.lastTransaction?.tokensBooked}{" "}
+                        {property?.lastTransaction?.tokenSymbol}
+                        <img
+                          src={property?.lastTransaction?.avatar}
+                          alt="avatar"
+                          className="w-4 h-4 rounded-full"
+                        />
+                        <ArrowUpRightIcon size={16} />
                       </Badge>
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1">
                         <div className="flex -space-x-2">
-                          {property.investors && property.investors.length > 0 ? (
+                          {property.investors &&
+                          property.investors.length > 0 ? (
                             property.investors.slice(0, 3).map((i) => (
                               <div
                                 key={i.investorId}
                                 className="w-6 h-6 rounded-full bg-gray-300 border-2 border-white"
                               >
-                                <img src={i.avatar} alt="avatar" className="w-full h-full rounded-full" />
+                                <img
+                                  src={i.avatar}
+                                  alt="avatar"
+                                  className="w-full h-full rounded-full"
+                                />
                               </div>
                             ))
                           ) : (
@@ -260,7 +277,9 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
                             </div>
                           )}
                         </div>
-                        <span>+{property.investors?.length || 0} Investors</span>
+                        <span>
+                          +{property.investors?.length || 0} Investors
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -272,7 +291,7 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
 
                 {/* Performance Metrics */}
                 <div className="grid grid-cols-2 border border-gray-200 rounded-xl p-4 gap-6 bg-white shadow-sm">
-                  <div  className="">
+                  <div className="">
                     <div className="flex  items-center gap-1 mb-1">
                       <span className="text-sm text-gray-500">Gross Yield</span>
                       <InfoIcon
