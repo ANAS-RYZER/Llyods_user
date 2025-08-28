@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, PoundSterling } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export type OrderStatus = "Success" | "Pending" | "Cancelled" | "Failed";
@@ -64,7 +64,7 @@ export const columns: ColumnDef<Order>[] = [
       const amount = row.getValue("amount") as number;
       return (
         <span>
-          <PoundSterling /> {amount.toLocaleString("en-IN")}
+          <PoundSterling /> {amount.toLocaleString("en-US")}
         </span>
       );
     },

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowUp, Bitcoin, CreditCard } from "lucide-react";
+import { ArrowDown, ArrowUp, Bitcoin, CreditCard, PoundSterling } from "lucide-react";
 import React from "react";
 
 const WalletComponet = ({ xrp }: any) => {

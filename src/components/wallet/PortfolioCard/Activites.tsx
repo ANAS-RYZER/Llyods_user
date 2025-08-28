@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
-import { Info, ChevronRight } from "lucide-react";
+import { Info, ChevronRight, PoundSterling } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
 

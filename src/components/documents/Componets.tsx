@@ -3,7 +3,7 @@ import React from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "../ui/button";
-import { Copy } from "lucide-react";
+import { Copy, PoundSterling } from "lucide-react";
 const Components = ({ orderData }: { orderData: any }) => {
   return (
     <Card className="mb-6">

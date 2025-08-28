@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { PoundSterling } from "lucide-react";
 
 interface PortfolioSummaryProps {
   totalValue: number;
