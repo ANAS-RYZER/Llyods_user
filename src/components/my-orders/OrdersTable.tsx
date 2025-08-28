@@ -83,7 +83,7 @@ export const OrdersTable = () => {
         </TableCell>
         <TableCell className="px-2 py-4 text-sm text-gray-900">
           <div className="text-gray-600 flex flex-col items-start justify-start text-sm">
-            <span className="font-semibold">{order.currency}</span>
+            <span className="font-semibold">GBP</span>
             <span className="text-xs text-gray-400">
               {order.paymentType}
             </span>
