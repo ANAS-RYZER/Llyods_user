@@ -27,6 +27,7 @@ import usePlaceOrderApi from "@/hooks/property/usePlaceOrderApi";
 import { toast } from "react-toastify";
 import useVerrifCreateSession from "@/hooks/kyc/international/useVerrifCreateSession";
 import useInvestorApi from "@/hooks/user/useInvestorApi";
+import useTokenStore from "@/store/tokenStore";
 
 const TokenPaymentDialog = dynamic(() => import("./TokenPaymentDialog"), {
   ssr: false,
@@ -57,9 +58,13 @@ export default function Token({
   const params = useParams();
   const router = useRouter();
   const pathname = usePathname();
+  const setTokenStore = useTokenStore((state) => state.setToken);
+  const tokenStore = useTokenStore((state) => state.token);
 
   const [quantity, setQuantity] = useState(
-    property?.tokenInformation?.minimumTokensToBuy || 0
+    tokenStore
+      ? tokenStore
+      : property?.tokenInformation?.minimumTokensToBuy || 0
   );
   const [inputValue, setInputValue] = useState(String(quantity));
   const [infoDialog, setInfoDialog] = useState(false);
@@ -227,6 +232,7 @@ export default function Token({
         );
         return;
       }
+      setTokenStore(newQuantity);
       setQuantity(newQuantity);
       setTokenError(null);
     },
