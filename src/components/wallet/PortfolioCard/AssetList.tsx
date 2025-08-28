@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Clock, ArrowUpRight } from "lucide-react";
+import { Search, Filter, Clock, ArrowUpRight, PoundSterling } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Building2, LineChart, BarChart3 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";

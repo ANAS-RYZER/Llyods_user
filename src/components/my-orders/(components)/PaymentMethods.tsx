@@ -3,7 +3,7 @@ import { InfoIcon } from "@/components/common/InfoIcon";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bitcoin, CreditCard } from "lucide-react";
+import { Bitcoin, CreditCard, PoundSterling } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import PaymentRadioButton from "./PaymentRadioButton";

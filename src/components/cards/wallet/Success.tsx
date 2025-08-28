@@ -11,7 +11,7 @@ import Icon from "@/components/common/Icon";
 
 import { CardFooter } from "@/components/ui/card";
 import useBankDetailsByID from "@/hooks/escrow/useBankDetailsByID";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, Check, PoundSterling } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
