@@ -106,14 +106,19 @@ const properties = [
 
 export default function PortfolioDashboard() {
   const [selectedTab, setSelectedTab] = useState("My Assets");
-  const { portfolio, loading, error, fetchPortfolio } = useFetchPortfolio();
+  const userId = sessionStorage.getItem("userId");
+  const { portfolio, loading, error, fetchPortfolio } = useFetchPortfolio(
+    userId as string
+  );
+
+  console.log("portfolio", portfolio);
   const {
     portfolioOrder,
     loading: loadingOrder,
     error: errorOrder,
-  } = useFetchPortfolioOrder();
+  } = useFetchPortfolioOrder(userId as string);
   const router = useRouter();
-  console.log(portfolio);
+  console.log("Port", portfolioOrder);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -139,11 +144,13 @@ export default function PortfolioDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <Card className="bg-[#30daaa] text-white border-0">
             <CardContent className="p-6">
-              <div className="text-sm opacity-90 mb-2">Total  Value</div>
-              <div className="text-2xl font-bold mb-2">${portfolioOrder?.summary?.totalCurrentValue}</div>
+              <div className="text-sm opacity-90 mb-2">Total Value</div>
+              <div className="text-2xl font-bold mb-2">
+                 £{portfolio?.metrics?.totalValue}
+              </div>
               <div className="flex items-center text-sm">
                 <TrendingUp className="w-4 h-4 mr-1" />+
-                {portfolioOrder?.metrics?.allTimeReturns}%
+                {/* {portfolio?.metrics?.allTimeReturns}% */}
               </div>
             </CardContent>
           </Card>
@@ -152,11 +159,11 @@ export default function PortfolioDashboard() {
             <CardContent className="p-6">
               <div className="text-sm text-[#9ea3ae] mb-2">Holdings</div>
               <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
-                ${portfolioOrder?.metrics?.totalInvestment}
+                £{portfolio?.metrics?.holdings}
               </div>
               <div className="flex items-center text-sm text-green-600">
                 <TrendingUp className="w-4 h-4 mr-1" />+
-                {portfolioOrder?.metrics?.holdingsReturn}%
+                {/* {portfolio?.metrics?.holdingsReturn}% */}
               </div>
             </CardContent>
           </Card>
@@ -164,7 +171,9 @@ export default function PortfolioDashboard() {
           <Card className="bg-[#f9fafb] border-0">
             <CardContent className="p-6">
               <div className="text-sm text-[#9ea3ae] mb-2">Cashflows</div>
-              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">${portfolioOrder?.metrics?.cashFlows}</div>
+              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
+                £{portfolio?.metrics?.cashFlows}
+              </div>
               <div className="flex items-center text-sm text-green-600">
                 <TrendingUp className="w-4 h-4 mr-1" />+
                 {portfolioOrder?.metrics?.cashFlowReturn}%
@@ -341,7 +350,7 @@ export default function PortfolioDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {portfolio?.portfolio?.assets.map((property) => (
+              {portfolioOrder?.portfolio?.assets.map((property:any) => (
                 <Card
                   key={property._id}
                   className="border border-[#e4e4e4] hover:shadow-md transition-shadow"

@@ -3,17 +3,22 @@ import api from "@/lib/httpClient";
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 
-const useFetchPortfolio = () => {
-  const [portfolio, setPortfolio] = useState<PortfolioResponse | null>(null);
+const useFetchPortfolio = (userId: string) => {
+  const [portfolio, setPortfolio] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<AxiosError<{ statusCode: number; message: string }> | null>(null);
+  const [error, setError] = useState<AxiosError<{
+    statusCode: number;
+    message: string;
+  }> | null>(null);
 
   const fetchPortfolio = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await api.get<PortfolioResponse>("/portfolio");
+      const response = await api.get<any>(
+        `/portfolio/portfolio/users/${userId}/metrics`
+      );
       setPortfolio(response.data);
     } catch (err: unknown) {
       if (err && (err as AxiosError).isAxiosError) {
