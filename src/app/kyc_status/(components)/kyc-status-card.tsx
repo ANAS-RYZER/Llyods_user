@@ -6,8 +6,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Clock, Loader2, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CheckCircle, Clock, XCircle } from "lucide-react";
 
 export type KYCStatus = "approved" | "submitted" | "failed";
 
@@ -53,16 +53,14 @@ const statusConfig = {
   },
 };
 
-export default function KYCStatusCard({
+const KYCStatusCard = ({
   status,
   className,
   title,
   description,
-}: KYCStatusCardProps) {
+}: KYCStatusCardProps) => {
   const config = statusConfig[status];
   const Icon = config?.icon;
-
-
 
   return (
     <Card
@@ -89,4 +87,5 @@ export default function KYCStatusCard({
       </CardContent>
     </Card>
   );
-}
+};
+export default KYCStatusCard;

@@ -1,16 +1,17 @@
 "use client";
 
 import useGetVeriffSessionStatus from "@/hooks/kyc/international/useGetVeriffSessionStatus";
-import KYCStatusCard from "./(components)/kyc-status-card";
 import { Loader2 } from "lucide-react";
+import KYCStatusCard from "./(components)/kyc-status-card";
 
-export default function Home() {
+export default function KYCStatus() {
   const { status, loading, error } = useGetVeriffSessionStatus();
+  console.log("KYC Status:", status, "Loading:", loading, "Error:", error);
 
   if (loading) {
     return (
-      <div className="animate-spin">
-        <Loader2 size={30} />
+      <div className="flex justify-center items-center min-h-screen" >
+        <Loader2 className="animate-spin text-primary " size={50} />
       </div>
     );
   }
@@ -27,7 +28,7 @@ export default function Home() {
 
         <div className="flex justify-center">
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-center">Current Status</h2>
+            <h2 className="text-xl font-semibold text-center">{status?"Current Status":"Kyc not Initiated"}</h2>
             {status && <KYCStatusCard  status={status} />}
           </div>
         </div>

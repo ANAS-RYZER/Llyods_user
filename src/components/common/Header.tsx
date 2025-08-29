@@ -237,12 +237,15 @@ const Header = () => {
             </Button>
           )}
 
-         
-
           {userData &&
             !userData?.kycCompleted &&
             userData?.country !== "India" && (
-              <Button onClick={handleVeriffSession}>Complete Kyc</Button>
+              <Button
+                className="px-6 bg-white hover:bg-white/80 text-primary"
+                onClick={handleVeriffSession}
+              >
+                Complete Kyc
+              </Button>
             )}
 
           {userData?._id &&

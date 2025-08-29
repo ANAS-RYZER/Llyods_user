@@ -12,7 +12,7 @@ const useGetVeriffSessionStatus = () => {
       try {
         const res = await api.get("/kyc/veriff/get-session");
         // Map backend status to internal type if needed
-        setStatus(res.data as KYCStatus);
+        setStatus(res.data.data as KYCStatus);
       } catch (err: any) {
         setError(err?.message || "Unknown error");
       } finally {
