@@ -115,6 +115,7 @@ export default function PortfolioDashboard() {
       setUserId(storedUserId);
     }
   }, []);
+  console.log("userId", userId);
 
   const { portfolio, loading, error, fetchPortfolio } = useFetchPortfolio(
     userId as string

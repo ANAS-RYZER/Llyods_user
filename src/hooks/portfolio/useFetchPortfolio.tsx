@@ -33,8 +33,10 @@ const useFetchPortfolio = (userId: string) => {
   };
 
   useEffect(() => {
-    fetchPortfolio();
-  }, []);
+    if (userId) {
+      fetchPortfolio();
+    }
+  }, [userId]);
 
   return { portfolio, loading, error, fetchPortfolio };
 };

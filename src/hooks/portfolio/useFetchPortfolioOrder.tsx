@@ -19,8 +19,10 @@ const useFetchPortfolioOrder = (userId:string) => {
     }
 
     useEffect(() => {
-        fetchPortfolioOrder();
-    }, []);
+        if (userId) {
+            fetchPortfolioOrder();
+        }
+    }, [userId]);
 
     return { portfolioOrder, loading, error };
 }
