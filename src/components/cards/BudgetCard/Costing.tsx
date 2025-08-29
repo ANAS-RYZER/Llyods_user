@@ -33,6 +33,8 @@ interface IProperty {
     legal?: Fee[];
     platform?: Fee[];
     brokerage?: Fee[];
+    reserve?: Fee[];
+    insurance?: Fee[];
   };
   tokenPrice: number;
 }
@@ -66,7 +68,8 @@ const Costing = ({
   const legalFeesList = fees?.legal?.filter((item) => item.status) || [];
   const platFormFeeList = fees?.platform?.filter((item) => item.status) || [];
   const brokerageFeeList = fees?.brokerage?.filter((item) => item.status) || [];
-
+  const reserveFeeList = fees?.reserve?.filter((item) => item.status) || [];
+  const insuranceFeeList = fees?.insurance?.filter((item) => item.status) || [];
   // Registration fee calculation
   const totalRegistrationPercentage = registrationFeesList
     .filter((item) => item.isPercentage === true)
@@ -108,12 +111,35 @@ const Costing = ({
   const totalBokerageValue =
     (basePropertyValue * totalBokeragePercentage) / 100 + totalBokerageFixed;
 
+  // Reserve fee calculation
+
+  // Insurance fee calculation
+  const totalInsurancePercentage = insuranceFeeList
+    .filter((item) => item.isPercentage)
+    .reduce((sum, item) => sum + item.value, 0);
+  const totalInsuranceFixed = insuranceFeeList
+    .filter((item) => !item.isPercentage)
+    .reduce((sum, item) => sum + item.value, 0);
+  const totalInsuranceValue =
+    (basePropertyValue * totalInsurancePercentage) / 100 + totalInsuranceFixed;
+
+  // Total cost calculation
+  const totalReservePercentage = reserveFeeList
+    .filter((item) => item.isPercentage)
+    .reduce((sum, item) => sum + item.value, 0);
+  const totalReserveFixed = reserveFeeList
+    .filter((item) => !item.isPercentage)
+    .reduce((sum, item) => sum + item.value, 0);
+  const totalReserveValue =
+    (basePropertyValue * totalReservePercentage) / 100 + totalReserveFixed;
+
   const totalCost =
     basePropertyValue +
     totalRegistrationValue +
     totalLegalValue +
     totalBokerageValue +
-    totalPlatformValue;
+    totalPlatformValue +
+    totalInsuranceValue;
 
   const costData = [
     {
@@ -166,7 +192,27 @@ const Costing = ({
       icon: Smartphone,
       color: "#8a77c4",
     },
-  ];
+    {
+      id: "reserve",
+      title: "Reserve Fund",
+      description: "Reserve fund for future expenses",
+      amount: totalReserveValue,
+      displayAmount: formatCurrencyDisplay(totalReserveValue),
+      fullAmount: formatCurrencyFull(totalReserveValue),
+      icon: Shield,
+      color: "#8a77c4",
+    },
+    {
+      id: "insurance",
+      title: "Insurance",
+      description: "Property insurance",
+      amount: totalInsuranceValue,
+      displayAmount: formatCurrencyDisplay(totalInsuranceValue),
+      fullAmount: formatCurrencyFull(totalInsuranceValue),
+      icon: Shield,
+      color: "#8a77c4",
+    },
+    ];
 
   // Chart data for pie chart
   const chartData = costData

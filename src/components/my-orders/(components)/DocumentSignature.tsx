@@ -11,10 +11,17 @@ import { useEffect, useState } from "react";
 const DocumentSignature = ({ order: orderData }: any) => {
   const router = useRouter();
   const { propertyId, orderId } = useParams();
-  const investorId = sessionStorage.getItem("userId");
+  const [investorId, setInvestorId] = useState<string | null>(null);
 
   const [documents, setDocuments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedInvestorId = sessionStorage.getItem("userId");
+      setInvestorId(storedInvestorId);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchDocs = async () => {

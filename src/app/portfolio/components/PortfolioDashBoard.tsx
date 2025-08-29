@@ -106,7 +106,16 @@ const properties = [
 
 export default function PortfolioDashboard() {
   const [selectedTab, setSelectedTab] = useState("My Assets");
-  const userId = sessionStorage.getItem("userId");
+  const [userId, setUserId] = useState<string | null>(null);
+  
+  // Move sessionStorage access to useEffect to avoid SSR issues
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedUserId = sessionStorage.getItem("userId");
+      setUserId(storedUserId);
+    }
+  }, []);
+
   const { portfolio, loading, error, fetchPortfolio } = useFetchPortfolio(
     userId as string
   );
@@ -119,6 +128,12 @@ export default function PortfolioDashboard() {
   } = useFetchPortfolioOrder(userId as string);
   const router = useRouter();
   console.log("Port", portfolioOrder);
+  
+  // Show loading state while userId is being retrieved
+  if (!userId) {
+    return <div>Loading...</div>;
+  }
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -399,13 +414,7 @@ export default function PortfolioDashboard() {
                               <span className="font-medium text-[#1a1b1d]">
                                 {property.tokens}
                               </span>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="p-0 h-auto"
-                              >
-                                <Edit className="w-4 h-4 text-[#9ea3ae]" />
-                              </Button>
+                          
                             </div>
                           </div>
                         </div>

@@ -1,14 +1,22 @@
 import api from '@/lib/httpClient'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const useCreateWallet = () => {
-    const userid = sessionStorage.getItem('userId')
+    const [userid, setUserid] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(false)
     const [data, setData] = useState<any>(null)
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedUserId = sessionStorage.getItem('userId')
+            setUserid(storedUserId)
+        }
+    }, [])
+
     async function createWallet() {
+        if (!userid) return
         setIsLoading(true)
         try {
             const res = await api.post('/custodial-wallet/create-smart-wallet', {
@@ -36,7 +44,8 @@ const useCreateWallet = () => {
         isLoading,
         error,
         success,
-        data
+        data,
+        userid
     }
 
 }

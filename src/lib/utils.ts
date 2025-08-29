@@ -137,7 +137,7 @@ export const formatCurrency = (value: number) => {
   return isNaN(value)
     ? "£ 0"
     : value
-        .toLocaleString("en-US", { style: "currency", currency: "EUR" })
+        .toLocaleString("en-US", { style: "currency", currency: "GBP" })
         .replace("£", "£ ");
 };
 
