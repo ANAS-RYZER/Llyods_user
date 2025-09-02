@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import GlobalRyzerProvider from "./provider";
 import Header from "@/components/common/Header";
+import TidioChat from "@/components/common/TidioChat";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -84,6 +85,7 @@ export default function RootLayout({
         <GlobalRyzerProvider>
           <Header />
           {children}
+          <TidioChat />
         </GlobalRyzerProvider>
       </body>
     </html>
