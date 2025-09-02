@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { CheckCircle, Clock, XCircle } from "lucide-react";
 
-export type KYCStatus = "approved" | "submitted" | "failed";
+export type KYCStatus = "approved" | "submitted" | "declined";
 
 interface KYCStatusCardProps {
   status: KYCStatus;
@@ -40,7 +40,7 @@ const statusConfig = {
     borderColor: "border-yellow-200",
     bgColor: "bg-yellow-50",
   },
-  failed: {
+  declined: {
     icon: XCircle,
     title: "KYC Verification Failed",
     description:
