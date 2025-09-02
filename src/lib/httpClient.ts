@@ -16,7 +16,7 @@ const getAuthToken = () => {
 
 // Create an Axios instance
 const api = axios.create({
-  baseURL:  'https://backend.ryzer.app/api',
+  baseURL:  'https://backendlloyd.ryzer.app/api',
   // baseURL:  'http://localhost:3001/api',
   headers: {
     'Content-Type': 'application/json',
