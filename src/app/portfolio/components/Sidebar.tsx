@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   BookCopy,
   Briefcase,
@@ -14,9 +14,14 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
+import useUserDetails from "@/hooks/user/useUserDetail";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { clearUser } = useUserDetails();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const router = useRouter();
 
   const navItems = [
     { name: "Portfolio", path: "/portfolio", icon: ChartNoAxesCombined },
@@ -34,6 +39,18 @@ const Sidebar = () => {
     { name: "Logout", icon: LogOut },
   ];
 
+  const handleLogout = () => {
+      setLoggingOut(true);
+      sessionStorage.clear();
+      clearUser();
+      toast.success("Logged out successfully");
+  
+      setTimeout(() => {
+        setLoggingOut(false);
+        window.location.href = "/";
+      }, 1000);
+    };
+
   return (
     <div className="w-60 min-h-screen shadow-sm border-r px-2 py-4 bg-[#1D1C21] rounded-tr-3xl">
       <h1 className="text-white mb-3">My Dashboard</h1>
@@ -41,14 +58,31 @@ const Sidebar = () => {
         <ul className="flex flex-col gap-3">
           {navItems.map((item) => {
             const Icon = item.icon;
+
+            if (item.name === "Logout") {
+              return (
+                <li key={item.name}>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-5 py-2 rounded-lg text-white hover:text-muted-foreground w-full text-left"
+                  >
+                    <div className="p-2 rounded-full">
+                      <Icon size={20} />
+                    </div>
+                    {item.name}
+                  </button>
+                </li>
+              );
+            }
+
             return (
-              <li className="justify-self-start" key={item.name}>
+              <li key={item.name}>
                 <Link
                   href={item.path || "#"}
-                  className={`flex items-center gap-5  py-2 rounded-lg transition-colors text-white hover:text-muted-foreground`}
+                  className={`flex items-center gap-5 py-2 rounded-lg transition-colors text-white hover:text-muted-foreground`}
                 >
                   <div
-                    className={` p-2 rounded-full ${
+                    className={`p-2 rounded-full ${
                       pathname === item.path ? "bg-white text-black" : ""
                     }`}
                   >
