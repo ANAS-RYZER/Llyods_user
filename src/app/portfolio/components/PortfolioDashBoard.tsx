@@ -313,7 +313,7 @@ export default function PortfolioDashboard() {
               </Button>
             </CardContent>
           </Card> */}
-           <Card className="rounded-2xl border border-gray-200 bg-white w-[600px]">
+           <Card className="rounded-2xl border border-gray-200 bg-white w-full">
       <CardHeader className="pb-3">
         <CardTitle className="text-2xl font-semibold text-foreground text-balance">
           Overview
