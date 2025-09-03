@@ -15,13 +15,20 @@ import {
   Maximize,
   Edit,
   ChevronUp,
+  AlertTriangle,
+  Minus,
+  CircleMinus,
 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import useFetchPortfolio from "@/hooks/portfolio/useFetchPortfolio";
 import useFetchPortfolioOrder from "@/hooks/portfolio/useFetchPortfolioOrder";
-import { formatDate } from "@/lib/utils";
+import { formatCurrency, formatCurrencyWithOutZero, formatDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import NoOrdersError from "./NoOrdersError";
+import Banner from "./Banner";
+import ActivitiesCard from "./ActivitiesCard";
+import  MyAssetsTable  from "./MyAssetsTable";
+import PerformanceCard from "./PerformanceCard";
 
 // Mock data - replace with your API calls
 const portfolioData = {
@@ -106,35 +113,14 @@ const properties = [
 
 export default function PortfolioDashboard() {
   const [selectedTab, setSelectedTab] = useState("My Assets");
-  const [userId, setUserId] = useState<string | null>(null);
-  
-  // Move sessionStorage access to useEffect to avoid SSR issues
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedUserId = sessionStorage.getItem("userId");
-      setUserId(storedUserId);
-    }
-  }, []);
-  console.log("userId", userId);
-
-  const { portfolio, loading, error, fetchPortfolio } = useFetchPortfolio(
-    userId as string
-  );
-
-  console.log("portfolio", portfolio);
+  const { portfolio, loading, error, fetchPortfolio } = useFetchPortfolio();
   const {
     portfolioOrder,
     loading: loadingOrder,
     error: errorOrder,
-  } = useFetchPortfolioOrder(userId as string);
-  const router = useRouter();
-  console.log("Port", portfolioOrder);
-  
-  // Show loading state while userId is being retrieved
-  if (!userId) {
-    return <div>Loading...</div>;
-  }
-  
+  } = useFetchPortfolioOrder();
+  const router = useRouter(); // No arguments needed for useRouter
+  console.log(portfolio);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -147,6 +133,7 @@ export default function PortfolioDashboard() {
       </div>
     );
   }
+  console.log("Portfolio Order:", portfolioOrder);
 
   return (
     <div className="p-0 max-w-7xl ">
@@ -157,61 +144,66 @@ export default function PortfolioDashboard() {
         </h1>
 
         {/* Portfolio Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <Card className="bg-[#30daaa] text-white border-0">
+       <div className="flex">
+        <div>
+         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <Card className="bg-[#006861] text-white border-0">
             <CardContent className="p-6">
-              <div className="text-sm opacity-90 mb-2">Total Value</div>
-              <div className="text-2xl font-bold mb-2">
-                 £{portfolio?.metrics?.totalValue}
-              </div>
+              <div className="text-sm opacity-90 mb-2">Total  Value</div>
+              {/* <div className="text-2xl font-bold mb-2">${portfolioOrder?.summary?.totalCurrentValue}</div> */}
+              <div className="text-2xl font-bold mb-2">{formatCurrencyWithOutZero(portfolioData.totalValue)}</div>
               <div className="flex items-center text-sm">
                 <TrendingUp className="w-4 h-4 mr-1" />+
-                {/* {portfolio?.metrics?.allTimeReturns}% */}
+                {/* {portfolioOrder?.metrics?.allTimeReturns}% */}
+                {portfolioData.totalValueChange}%
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-[#f9fafb] border-0">
+          <Card className="bg-[#F3F4F6] border shadow-none">
             <CardContent className="p-6">
-              <div className="text-sm text-[#9ea3ae] mb-2">Holdings</div>
+              <div className="text-sm text-[#9ea3ae] mb-2"> My Holdings</div>
               <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
-                £{portfolio?.metrics?.holdings}
+                {/* ${portfolioOrder?.metrics?.totalInvestment} */}
+                {/* $2,650,000 */}
+                {formatCurrencyWithOutZero(portfolioData.investments)}
               </div>
               <div className="flex items-center text-sm text-green-600">
                 <TrendingUp className="w-4 h-4 mr-1" />+
-                {/* {portfolio?.metrics?.holdingsReturn}% */}
+                {/* {portfolioOrder?.metrics?.holdingsReturn}% */}
+                {portfolioData.investmentsChange}%
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-[#f9fafb] border-0">
+          <Card className="bg-[#F3F4F6] border shadow-none">
             <CardContent className="p-6">
-              <div className="text-sm text-[#9ea3ae] mb-2">Cashflows</div>
-              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
-                £{portfolio?.metrics?.cashFlows}
-              </div>
+              <div className="text-sm text-[#9ea3ae] mb-2">My Cashflows</div>
+              {/* <div className="text-2xl font-bold text-[#1a1b1d] mb-2">${portfolioOrder?.metrics?.cashFlows }</div> */}
+              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">{formatCurrencyWithOutZero(portfolioData.cashflows)}</div>
               <div className="flex items-center text-sm text-green-600">
                 <TrendingUp className="w-4 h-4 mr-1" />+
-                {portfolioOrder?.metrics?.cashFlowReturn}%
+                {/* {portfolioOrder?.metrics?.cashFlowReturn}% */}
+                {portfolioData.cashflowsChange}%
               </div>
             </CardContent>
           </Card>
 
-          {/* <Card className="bg-[#f9fafb] border-0">
+          <Card className="bg-[#F3F4F6] border shadow-none">
             <CardContent className="p-6">
               <div className="text-sm text-[#9ea3ae] mb-2">Annual Yields</div>
-              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">55%</div>
+              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">{portfolioData.annualYields}%</div>
               <div className="text-sm text-[#9ea3ae]">Average</div>
             </CardContent>
-          </Card> */}
+          </Card>
         </div>
 
         {/* Performance Chart and Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <Card className="lg:col-span-2 border-0 bg-white">
+        <div className="flex  gap-6 mb-8">
+          {/* <Card className="lg:col-span-2 border-0 bg-white">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg font-semibold text-[#1a1b1d]">
+                <CardTitle className=" text-xl font-semibold text-[#1a1b1d]">
                   Performance
                 </CardTitle>
                 <Button
@@ -222,13 +214,14 @@ export default function PortfolioDashboard() {
                   Last month
                 </Button>
               </div>
+              <hr/>
               <div className="flex items-center gap-6 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-[#3e54eb]"></div>
                   <span className="text-[#9ea3ae]">Gross yield</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#0eb57b]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#725aec]"></div>
                   <span className="text-[#9ea3ae]">Net yield</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -253,7 +246,7 @@ export default function PortfolioDashboard() {
                     <Line
                       type="monotone"
                       dataKey="netYield"
-                      stroke="#0eb57b"
+                      stroke="#725aec"
                       strokeWidth={2}
                       dot={false}
                     />
@@ -268,14 +261,16 @@ export default function PortfolioDashboard() {
                 </ResponsiveContainer>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
+         <PerformanceCard/>
 
-          <Card className="border-0 bg-white">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-[#1a1b1d]">
+          {/* <Card className="w-full border-0 bg-white">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl font-semibold text-[#1a1b1d]">
                 Overview
               </CardTitle>
             </CardHeader>
+            <hr />
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
@@ -317,11 +312,65 @@ export default function PortfolioDashboard() {
                 Import files (properties)
               </Button>
             </CardContent>
-          </Card>
+          </Card> */}
+           <Card className="rounded-2xl border border-gray-200 bg-white w-full">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-2xl font-semibold text-foreground text-balance">
+          Overview
+        </CardTitle>
+      </CardHeader>
+
+      {/* subtle divider below header */}
+      <div className="border-t border-gray-200" aria-hidden="true" />
+
+      <CardContent className="pt-6 space-y-6">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* Asset Count */}
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Assets Count</p>
+            <p className="text-2xl font-semibold text-foreground">
+              {/* {portfolioOrder?.summary?.uniqueAssets ?? "-"} */}
+              2
+            </p>
+          </div>
+
+          {/* Monthly Yields */}
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Last Month Yields</p>
+            <p className="text-xl font-semibold text-foreground">
+              £
+              {/* {portfolioOrder?.metrics?.monthlyCashFlow ?? "0"} */}
+              100
+            </p>
+          </div>
+
+            {/* Next Distribution */}
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Upcoming Distribution Date</p>
+            <p className="text-xl font-semibold text-foreground">
+              {/* {formatDate(
+                portfolio?.portfolio?.assets?.[0]?.rentalDistributions?.[0]?.month ??
+                  "10 Sep, 2025"
+              )} */} 10 Sep, 2025
+            </p>
+          </div>
+
+          {/* Total Tokens */}
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Upcoming Distribution</p>
+            <p className="text-xl font-semibold text-foreground">
+              £100
+            </p>
+          </div>
+
+          
+        </div>
+      </CardContent>
+    </Card>
         </div>
 
         {/* Assets Section */}
-        <Card className="border-0 bg-white">
+        {/* <Card className="border-0 bg-white">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
@@ -335,7 +384,7 @@ export default function PortfolioDashboard() {
                 >
                   My Assets
                 </button>
-                {/* <button
+                <button
                   onClick={() => setSelectedTab("Upcoming Earnings")}
                   className={`text-lg font-semibold pb-2 border-b-2 ${
                     selectedTab === "Upcoming Earnings"
@@ -344,15 +393,15 @@ export default function PortfolioDashboard() {
                   }`}
                 >
                   Upcoming Earnings
-                </button> */}
+                </button>
               </div>
               <div className="flex items-center gap-2">
-                {/* <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm">
                   <Search className="w-4 h-4" />
                 </Button>
                 <Button variant="outline" size="sm">
                   <Download className="w-4 h-4" />
-                </Button> */}
+                </Button>
                 <Button
                   className="bg-[#3e54eb] hover:bg-[#3e54eb]/90"
                   size="sm"
@@ -366,7 +415,7 @@ export default function PortfolioDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {portfolioOrder?.portfolio?.assets.map((property:any) => (
+              {portfolio?.portfolio?.assets.map((property) => (
                 <Card
                   key={property._id}
                   className="border border-[#e4e4e4] hover:shadow-md transition-shadow"
@@ -415,7 +464,13 @@ export default function PortfolioDashboard() {
                               <span className="font-medium text-[#1a1b1d]">
                                 {property.tokens}
                               </span>
-                          
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="p-0 h-auto"
+                              >
+                                <Edit className="w-4 h-4 text-[#9ea3ae]" />
+                              </Button>
                             </div>
                           </div>
                         </div>
@@ -426,7 +481,23 @@ export default function PortfolioDashboard() {
               ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
+        <MyAssetsTable/>
+       </div>
+        <div className="flex flex-col gap-6 px-4">
+          <Banner
+        icon={<AlertTriangle className="h-6 w-6 text-yellow-400" aria-hidden="true" />}
+        title="Submit tax information"
+        description="Redeem reward points or yields to unlock airline promo codes"
+      />
+      <Banner
+        icon={<CircleMinus className="h-6 w-6 text-red-500" aria-hidden="true" />}
+        title="Submit tax information"
+        description="Redeem reward points or yields to unlock airline promo codes"
+      />
+      <ActivitiesCard />
+        </div>
+       </div>
       </div>
     </div>
   );
