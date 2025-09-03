@@ -85,7 +85,7 @@ export default function TenantInformation({
             </div>
 
             {/* Rental Income */}
-            {/* <div className="border rounded-lg mb-6">
+            <div className="border rounded-lg mb-6">
               <div className="p-4 border-b flex justify-between items-center">
                 <h3 className="text-lg font-bold">Rental Income</h3>
                 <div className="bg-gray-100 rounded-full p-1">
@@ -153,7 +153,7 @@ export default function TenantInformation({
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
 
             {/* Current Tenants */}
             <div className="border rounded-lg">
