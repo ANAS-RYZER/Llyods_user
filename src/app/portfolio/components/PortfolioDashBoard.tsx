@@ -22,12 +22,16 @@ import {
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import useFetchPortfolio from "@/hooks/portfolio/useFetchPortfolio";
 import useFetchPortfolioOrder from "@/hooks/portfolio/useFetchPortfolioOrder";
-import { formatCurrency, formatCurrencyWithOutZero, formatDate } from "@/lib/utils";
+import {
+  formatCurrency,
+  formatCurrencyWithOutZero,
+  formatDate,
+} from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import NoOrdersError from "./NoOrdersError";
 import Banner from "./Banner";
 import ActivitiesCard from "./ActivitiesCard";
-import  MyAssetsTable  from "./MyAssetsTable";
+import MyAssetsTable from "./MyAssetsTable";
 import PerformanceCard from "./PerformanceCard";
 
 // Mock data - replace with your API calls
@@ -136,7 +140,7 @@ export default function PortfolioDashboard() {
   console.log("Portfolio Order:", portfolioOrder);
 
   return (
-    <div className="p-0 max-w-7xl ">
+    <div className="p-0 w-full">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-semibold text-[#1a1b1d] mb-6">
@@ -144,63 +148,76 @@ export default function PortfolioDashboard() {
         </h1>
 
         {/* Portfolio Cards */}
-       <div className="flex">
-        <div>
-         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-[#006861] text-white border-0">
-            <CardContent className="p-6">
-              <div className="text-sm opacity-90 mb-2">Total  Value</div>
-              {/* <div className="text-2xl font-bold mb-2">${portfolioOrder?.summary?.totalCurrentValue}</div> */}
-              <div className="text-2xl font-bold mb-2">{formatCurrencyWithOutZero(portfolioData.totalValue)}</div>
-              <div className="flex items-center text-sm">
-                <TrendingUp className="w-4 h-4 mr-1" />+
-                {/* {portfolioOrder?.metrics?.allTimeReturns}% */}
-                {portfolioData.totalValueChange}%
-              </div>
-            </CardContent>
-          </Card>
+        <div className="flex w-full">
+          <div className="w-[67%]">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+              <Card className="bg-[#006861] text-white border-0">
+                <CardContent className="p-6">
+                  <div className="text-sm opacity-90 mb-2">Total Value</div>
+                  {/* <div className="text-2xl font-bold mb-2">${portfolioOrder?.summary?.totalCurrentValue}</div> */}
+                  <div className="text-2xl font-bold mb-2">
+                    {formatCurrencyWithOutZero(portfolioData.totalValue)}
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <TrendingUp className="w-4 h-4 mr-1" />+
+                    {/* {portfolioOrder?.metrics?.allTimeReturns}% */}
+                    {portfolioData.totalValueChange}%
+                  </div>
+                </CardContent>
+              </Card>
 
-          <Card className="bg-[#F3F4F6] border shadow-none">
-            <CardContent className="p-6">
-              <div className="text-sm text-[#9ea3ae] mb-2"> My Holdings</div>
-              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
-                {/* ${portfolioOrder?.metrics?.totalInvestment} */}
-                {/* $2,650,000 */}
-                {formatCurrencyWithOutZero(portfolioData.investments)}
-              </div>
-              <div className="flex items-center text-sm text-green-600">
-                <TrendingUp className="w-4 h-4 mr-1" />+
-                {/* {portfolioOrder?.metrics?.holdingsReturn}% */}
-                {portfolioData.investmentsChange}%
-              </div>
-            </CardContent>
-          </Card>
+              <Card className="bg-[#F3F4F6] border shadow-none">
+                <CardContent className="p-6">
+                  <div className="text-sm text-[#9ea3ae] mb-2">
+                    {" "}
+                    My Holdings
+                  </div>
+                  <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
+                    {/* ${portfolioOrder?.metrics?.totalInvestment} */}
+                    {/* $2,650,000 */}
+                    {formatCurrencyWithOutZero(portfolioData.investments)}
+                  </div>
+                  <div className="flex items-center text-sm text-green-600">
+                    <TrendingUp className="w-4 h-4 mr-1" />+
+                    {/* {portfolioOrder?.metrics?.holdingsReturn}% */}
+                    {portfolioData.investmentsChange}%
+                  </div>
+                </CardContent>
+              </Card>
 
-          <Card className="bg-[#F3F4F6] border shadow-none">
-            <CardContent className="p-6">
-              <div className="text-sm text-[#9ea3ae] mb-2">My Cashflows</div>
-              {/* <div className="text-2xl font-bold text-[#1a1b1d] mb-2">${portfolioOrder?.metrics?.cashFlows }</div> */}
-              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">{formatCurrencyWithOutZero(portfolioData.cashflows)}</div>
-              <div className="flex items-center text-sm text-green-600">
-                <TrendingUp className="w-4 h-4 mr-1" />+
-                {/* {portfolioOrder?.metrics?.cashFlowReturn}% */}
-                {portfolioData.cashflowsChange}%
-              </div>
-            </CardContent>
-          </Card>
+              <Card className="bg-[#F3F4F6] border shadow-none">
+                <CardContent className="p-6">
+                  <div className="text-sm text-[#9ea3ae] mb-2">
+                    My Cashflows
+                  </div>
+                  {/* <div className="text-2xl font-bold text-[#1a1b1d] mb-2">${portfolioOrder?.metrics?.cashFlows }</div> */}
+                  <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
+                    {formatCurrencyWithOutZero(portfolioData.cashflows)}
+                  </div>
+                  <div className="flex items-center text-sm text-green-600">
+                    <TrendingUp className="w-4 h-4 mr-1" />+
+                    {/* {portfolioOrder?.metrics?.cashFlowReturn}% */}
+                    {portfolioData.cashflowsChange}%
+                  </div>
+                </CardContent>
+              </Card>
 
-          <Card className="bg-[#F3F4F6] border shadow-none">
-            <CardContent className="p-6">
-              <div className="text-sm text-[#9ea3ae] mb-2">Annual Yields</div>
-              <div className="text-2xl font-bold text-[#1a1b1d] mb-2">{portfolioData.annualYields}%</div>
-              <div className="text-sm text-[#9ea3ae]">Average</div>
-            </CardContent>
-          </Card>
-        </div>
+              <Card className="bg-[#F3F4F6] border shadow-none">
+                <CardContent className="p-6">
+                  <div className="text-sm text-[#9ea3ae] mb-2">
+                    Annual Yields
+                  </div>
+                  <div className="text-2xl font-bold text-[#1a1b1d] mb-2">
+                    {portfolioData.annualYields}%
+                  </div>
+                  <div className="text-sm text-[#9ea3ae]">Average</div>
+                </CardContent>
+              </Card>
+            </div>
 
-        {/* Performance Chart and Overview */}
-        <div className="flex  gap-6 mb-8">
-          {/* <Card className="lg:col-span-2 border-0 bg-white">
+            {/* Performance Chart and Overview */}
+            <div className="flex  gap-6 mb-8">
+              {/* <Card className="lg:col-span-2 border-0 bg-white">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className=" text-xl font-semibold text-[#1a1b1d]">
@@ -262,9 +279,9 @@ export default function PortfolioDashboard() {
               </div>
             </CardContent>
           </Card> */}
-         <PerformanceCard/>
+              <PerformanceCard />
 
-          {/* <Card className="w-full border-0 bg-white">
+              {/* <Card className="w-full border-0 bg-white">
             <CardHeader className="pb-2">
               <CardTitle className="text-xl font-semibold text-[#1a1b1d]">
                 Overview
@@ -313,64 +330,70 @@ export default function PortfolioDashboard() {
               </Button>
             </CardContent>
           </Card> */}
-           <Card className="rounded-2xl border border-gray-200 bg-white w-full">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-2xl font-semibold text-foreground text-balance">
-          Overview
-        </CardTitle>
-      </CardHeader>
+              <Card className="rounded-2xl border border-gray-200 bg-white w-full">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-2xl font-semibold text-foreground text-balance">
+                    Overview
+                  </CardTitle>
+                </CardHeader>
 
-      {/* subtle divider below header */}
-      <div className="border-t border-gray-200" aria-hidden="true" />
+                {/* subtle divider below header */}
+                <div className="border-t border-gray-200" aria-hidden="true" />
 
-      <CardContent className="pt-6 space-y-6">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {/* Asset Count */}
-          <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Assets Count</p>
-            <p className="text-2xl font-semibold text-foreground">
-              {/* {portfolioOrder?.summary?.uniqueAssets ?? "-"} */}
-              2
-            </p>
-          </div>
+                <CardContent className="pt-6 space-y-6">
+                  <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {/* Asset Count */}
+                    <div className="space-y-1">
+                      <p className="text-xs text-muted-foreground">
+                        Assets Count
+                      </p>
+                      <p className="text-2xl font-semibold text-foreground">
+                        {/* {portfolioOrder?.summary?.uniqueAssets ?? "-"} */}2
+                      </p>
+                    </div>
 
-          {/* Monthly Yields */}
-          <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Last Month Yields</p>
-            <p className="text-xl font-semibold text-foreground">
-              £
-              {/* {portfolioOrder?.metrics?.monthlyCashFlow ?? "0"} */}
-              100
-            </p>
-          </div>
+                    {/* Monthly Yields */}
+                    <div className="space-y-1">
+                      <p className="text-xs text-muted-foreground">
+                        Last Month Yields
+                      </p>
+                      <p className="text-xl font-semibold text-foreground">
+                        £
+                        {/* {portfolioOrder?.metrics?.monthlyCashFlow ?? "0"} */}
+                        100
+                      </p>
+                    </div>
 
-            {/* Next Distribution */}
-          <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Upcoming Distribution Date</p>
-            <p className="text-xl font-semibold text-foreground">
-              {/* {formatDate(
+                    {/* Next Distribution */}
+                    <div className="space-y-1">
+                      <p className="text-xs text-muted-foreground">
+                        Upcoming Distribution Date
+                      </p>
+                      <p className="text-xl font-semibold text-foreground">
+                        {/* {formatDate(
                 portfolio?.portfolio?.assets?.[0]?.rentalDistributions?.[0]?.month ??
                   "10 Sep, 2025"
-              )} */} 10 Sep, 2025
-            </p>
-          </div>
+              )} */}{" "}
+                        10 Sep, 2025
+                      </p>
+                    </div>
 
-          {/* Total Tokens */}
-          <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Upcoming Distribution</p>
-            <p className="text-xl font-semibold text-foreground">
-              £100
-            </p>
-          </div>
+                    {/* Total Tokens */}
+                    <div className="space-y-1">
+                      <p className="text-xs text-muted-foreground">
+                        Upcoming Distribution
+                      </p>
+                      <p className="text-xl font-semibold text-foreground">
+                        £100
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-          
-        </div>
-      </CardContent>
-    </Card>
-        </div>
-
-        {/* Assets Section */}
-        {/* <Card className="border-0 bg-white">
+            {/* Assets Section */}
+            {/* <Card className="border-0 bg-white">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
@@ -482,22 +505,36 @@ export default function PortfolioDashboard() {
             </div>
           </CardContent>
         </Card> */}
-        <MyAssetsTable/>
-       </div>
-        <div className="flex flex-col gap-6 px-4">
-          <Banner
-        icon={<AlertTriangle className="h-6 w-6 text-yellow-400" aria-hidden="true" />}
-        title="Submit tax information"
-        description="Redeem reward points or yields to unlock airline promo codes"
-      />
-      <Banner
-        icon={<CircleMinus className="h-6 w-6 text-red-500" aria-hidden="true" />}
-        title="Submit tax information"
-        description="Redeem reward points or yields to unlock airline promo codes"
-      />
-      <ActivitiesCard />
+            <MyAssetsTable />
+          </div>
+          <div className="flex flex-col w-[30%] gap-6 px-4">
+            <Banner
+              icon={
+                <AlertTriangle
+                  className="h-6 w-6 text-yellow-400"
+                  aria-hidden="true"
+                />
+              }
+              bgColor="black"
+              title="Submit tax information"
+              description="Redeem reward points or yields to unlock airline promo codes"
+              textColor="white"
+            />
+            <Banner
+              icon={
+                <AlertTriangle
+                  className="h-6 w-6 text-red-600"
+                  aria-hidden="true"
+                />
+              }
+              bgColor="#f2e9df"
+              title="Submit tax information"
+              description="Redeem reward points or yields to unlock airline promo codes"
+              textColor="black"
+            />
+            <ActivitiesCard />
+          </div>
         </div>
-       </div>
       </div>
     </div>
   );

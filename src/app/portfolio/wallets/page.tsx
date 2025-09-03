@@ -5,6 +5,8 @@ import { StatsGrid } from "./components/StatsGrid";
 import { BalanceTable } from "./components/BalanceTable";
 import { TransactionList } from "./components/TransactionList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Banner from "../components/Banner";
+import { AlertTriangle } from "lucide-react";
 
 // This would come from your API
 const mockData = {
@@ -122,7 +124,32 @@ const WalletsPage = () => {
           <TransactionList transactions={mockData.transactions} />
         </div>
       </div>
-      <div className="w-[30%] border  min-h-screen"></div>
+      <div className="w-[30%] space-y-2   min-h-screen">
+        <Banner
+          icon={
+            <AlertTriangle
+              className="h-6 w-6 text-yellow-400"
+              aria-hidden="true"
+            />
+          }
+          bgColor="black"
+          title="Submit tax information"
+          description="Redeem reward points or yields to unlock airline promo codes"
+          textColor="white"
+        />
+        <Banner
+          icon={
+            <AlertTriangle
+              className="h-6 w-6 text-red-600"
+              aria-hidden="true"
+            />
+          }
+          bgColor="#f2e9df"
+          title="Submit tax information"
+          description="Redeem reward points or yields to unlock airline promo codes"
+          textColor="black"
+        />
+      </div>
     </div>
   );
 };

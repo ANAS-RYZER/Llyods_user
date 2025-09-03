@@ -69,7 +69,7 @@ export const BalanceTable: React.FC<BalanceTableProps> = ({ balances }) => {
 
   const renderSortIcon = (key: SortKey) => {
     if (!sortConfig || sortConfig.key !== key) {
-    return <ChevronDown className="inline w-4 h-4 ml-1 text-gray-600" />;
+      return <ChevronDown className="inline w-4 h-4 ml-1 text-gray-600" />;
     }
     if (sortConfig.direction === "asc") {
       return <ChevronUp className="inline w-4 h-4 ml-1 text-gray-600" />;
@@ -141,7 +141,7 @@ export const BalanceTable: React.FC<BalanceTableProps> = ({ balances }) => {
             ) : (
               sortedBalances.map((row, index) => {
                 const flag = countries.find(
-                  (c) => c.code.toLowerCase() === row.symbol.toLowerCase()
+                  (c) => c.symbol === row.symbol
                 )?.flag;
                 return (
                   <tr

@@ -51,18 +51,21 @@ export const getFormattedVideoUrl = (url: string) => {
 export const countries = [
   {
     country: "India",
+    symbol: "INR", // 
     code: "+91",
     flag: "https://flagsapi.com/IN/shiny/64.png",
     format: "XXXXX-XXXXX (10 digits)",
   },
   {
     country: "United States",
+    symbol: "USD", // 
     code: "+1",
     flag: "https://flagsapi.com/US/shiny/64.png",
     format: "(XXX) XXX-XXXX (10 digits)",
   },
   {
     country: "United Kingdom",
+    symbol: "GBP", 
     code: "+44",
     flag: "https://flagsapi.com/GB/shiny/64.png",
     format: "XXXXX XXXXXX or 07XXX XXXXXX (10-11 digits)",
