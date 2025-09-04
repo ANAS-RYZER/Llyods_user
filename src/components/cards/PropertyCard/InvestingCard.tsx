@@ -346,7 +346,10 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
                       />
                     </div>
                     <div className="text-xl font-semibold text-emerald-600">
-                      {property?.investmentPerformance?.moic.toFixed(2)}x
+                      {property?.investmentPerformance?.moic
+                        ? property?.investmentPerformance?.moic.toFixed(2)
+                        : ""}
+                      x
                     </div>
                   </div>
                 </div>

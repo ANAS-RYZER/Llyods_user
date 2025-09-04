@@ -27,6 +27,7 @@ export default function TenantInformation({
 }) {
   const [selectedTenant, setSelectedTenant] = useState(tenants[0]?._id || "");
   const [rentView, setRentView] = useState("monthly");
+  console.log(tenants)
 
   console.log(rentInformation?.expenses?.monthlyExpenses);
   const activeTenant =
