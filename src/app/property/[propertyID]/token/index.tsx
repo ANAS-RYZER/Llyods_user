@@ -226,9 +226,9 @@ export default function Token({
         );
         return;
       }
-      if (newQuantity > propertyValues.maximumToken) {
+      if (newQuantity > propertyValues.availableTokens) {
         setTokenError(
-          `You can only buy up to ${propertyValues.maximumToken} tokens.`
+          `You can only buy up to ${propertyValues.availableTokens} tokens.`
         );
         return;
       }
@@ -236,7 +236,7 @@ export default function Token({
       setQuantity(newQuantity);
       setTokenError(null);
     },
-    [propertyValues.minimumToken, propertyValues.maximumToken]
+    [propertyValues.minimumToken, propertyValues.availableTokens]
   );
 
   const accesToken =
