@@ -212,7 +212,7 @@ const Costing = ({
       icon: Shield,
       color: "#8a77c4",
     },
-    ];
+  ];
 
   // Chart data for pie chart
   const chartData = costData
@@ -280,7 +280,7 @@ const Costing = ({
                             <h3 className="font-medium text-sm text-gray-900">
                               {item.title}
                             </h3>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-gray-500 break-words ">
                               {item.description}
                             </p>
                           </div>
