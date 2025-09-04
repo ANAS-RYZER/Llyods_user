@@ -286,7 +286,7 @@ const Costing = ({
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className=" font-semibold text-gray-900">
+                          <div className=" font-semibold text-gray-900 whitespace-nowrap">
                             {item.displayAmount}
                           </div>
                           <div className="text-[10px] text-gray-500">
