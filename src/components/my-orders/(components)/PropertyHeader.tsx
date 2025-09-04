@@ -13,6 +13,7 @@ import {
   PhoneCall,
   Shield,
 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -92,9 +93,17 @@ const PropertyHeader = ({
         {assetmanager && (
           <>
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-gray-400"></div>
+              <div className="h-10 w-10 rounded-full border">
+                <Image
+                  src={property.hostedBy.logoURL}
+                  alt={property.hostedBy.name}
+                  height={130}
+                  width={130}
+                  className="rounded-full"
+                />
+              </div>
               <div>
-                <h1 className="text-lg font-bold">Charan Teja</h1>
+                <h1 className="text-lg font-bold">{property.hostedBy.name}</h1>
                 <p className="text-sm">Asset Manager</p>
               </div>
             </div>

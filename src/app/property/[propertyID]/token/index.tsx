@@ -7,6 +7,7 @@ import {
   Terminal,
   Calendar,
   CalendarFold,
+  ArrowUpRight,
 } from "lucide-react";
 import React, { useMemo, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
@@ -488,7 +489,13 @@ export default function Token({
                     }
                   }}
                 >
-                  Let's Invest
+                  {isPlaceOrder ? (
+                    "Make Payment"
+                  ) : (
+                    <>
+                      Continue <ArrowUpRight />
+                    </>
+                  )}
                 </Button>
               ) : (
                 <Button
