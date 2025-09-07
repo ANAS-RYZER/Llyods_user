@@ -16,6 +16,7 @@ import {
   ArrowUpRightIcon,
   PoundSterling,
   LayoutGridIcon,
+  Loader2,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +32,8 @@ import {
 import ProgressBar from "./ProgessBar";
 import PhotoDialog from "./PhotoDialog";
 import { InfoIcon } from "@/components/common/InfoIcon";
+import ShareCard from "../ShareCard/ShareCard";
+import useBookmark from "@/hooks/BookMark/useBookmark";
 
 interface PropertyCardProps {
   property: IProperty;
@@ -38,12 +41,17 @@ interface PropertyCardProps {
 }
 
 const InvestingCard = ({ property, className }: PropertyCardProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const formattedUrl = getFormattedVideoUrl(property?.media?.videoURL);
   const [showAllPhotos, setShowAllPhotos] = useState(false);
+    const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(property?.isBookmarked);
+
+  const [isBookmarkLoading, setIsBookmarkLoading] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const { bookmarkProperty } = useBookmark();
 
   const gallery = [
     ...(Array.isArray(property?.media?.imageURL)
@@ -68,6 +76,19 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
   const investedPercentage = Math.round(
     ((totalTokens - availableTokens) / totalTokens) * 100
   );
+  const handleBookmarkToggle = async () => {
+    try {
+      setIsBookmarkLoading(true);
+      const updatedBookmarkStatus = await bookmarkProperty(property._id);
+      if (updatedBookmarkStatus) {
+        setIsBookmarked(!isBookmarked);
+      }
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+    } finally {
+      setIsBookmarkLoading(false);
+    }
+  };
   return (
     <>
       <div className="max-w-6xl mx-auto p-4">
@@ -116,22 +137,56 @@ const InvestingCard = ({ property, className }: PropertyCardProps) => {
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => setIsBookmarked(!isBookmarked)}
+                    onClick={handleBookmarkToggle}
                     className="bg-[#ECE8FF] border-[#BCACFF] border-2 rounded-full hover:bg-[#ECE8FF]/90"
                   >
-                    <Bookmark
+                    {isBookmarkLoading ?(
+                      <span className="animate-spin">
+                  <Loader2 className="w-4 h-4 sm:w-3 text-black sm:h-3 md:w-6 md:h-6" />
+                </span>
+                    ) : isBookmarked ? (
+                      <>
+                      <Bookmark
+                      className="h-4 text-primary w-4 fill-current "
+                    />
+                    <span className="text-primary text-[12px] font-semibold">
+                      Bookmark{" "}
+                    </span>
+                      </>
+                    ):(
+                      <>
+                      <Bookmark
+                      className="h-4 text-primary w-4 "
+                    />
+                    <span className="text-primary text-[12px] font-semibold">
+                      Bookmark{" "}
+                    </span>
+                      </>
+                    )
+
+                    }
+                    {/* <Bookmark
                       className={`h-4 text-primary w-4 ${
                         isBookmarked ? "fill-current" : ""
                       }`}
                     />
                     <span className="text-primary text-[12px] font-semibold">
                       Bookmark{" "}
-                    </span>
+                    </span> */}
                   </Button>
+                  {isShareOpen && (
+              <ShareCard
+                isOpen={isShareOpen}
+                onClose={() => setIsShareOpen(false)}
+                shareUrl={window.location.href}
+                title={property?.name}
+              />
+            )}
                   <Button
                     variant="secondary"
                     size="sm"
                     className="bg-[#D9E7FF] border-2 border-[#83B2FF] rounded-full hover:bg-[#D9E7FF]/90"
+                    onClick={() => setIsShareOpen(true)}
                   >
                     <Share2 className="h-4 w-4 text-[#3B82F6]" />
                     <span className="text-[#3B82F6] text-[12px] font-semibold">

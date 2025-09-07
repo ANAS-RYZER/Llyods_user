@@ -49,7 +49,7 @@ const BookmarkSearch = ({
             onChange={handleSearch}
             className="w-full rounded-full pl-12 h-12"
           />
-          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center text-gray-400  h-8 w-8 rounded-full bg-violet-500">
+          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center text-gray-400  h-8 w-8 rounded-full bg-green-500">
             {" "}
             <SearchIcon className="h-6 w-6 text-white" />
           </div>

@@ -1,8 +1,9 @@
 "use client";
 import PropertyHeaderSKeleton from "@/components/placeOrder/PropertyHeaderSKeleton";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; // Expected 2 arguments, but got 1.
 import { IProperty } from "@/constants/global";
+import { truncateText } from "@/lib/utils";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -93,7 +94,7 @@ const PropertyHeader = ({
         {assetmanager && (
           <>
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full border">
+              <div className="h-9 w-10 rounded-full border flex justify-center items-center">
                 <Image
                   src={property.hostedBy.logoURL}
                   alt={property.hostedBy.name}
@@ -103,7 +104,7 @@ const PropertyHeader = ({
                 />
               </div>
               <div>
-                <h1 className="text-lg font-bold">{property.hostedBy.name}</h1>
+                <h1 className="text-lg font-bold truncate w-48">{(property.hostedBy.name)}</h1>
                 <p className="text-sm">Asset Manager</p>
               </div>
             </div>
