@@ -1,14 +1,17 @@
 import { Button } from '@/components/ui/button'
 import { PhoneCall } from 'lucide-react'
 import React from 'react'
+type AssetManagerProps = {
+  name: string
+}
 
-const AssetManager = () => {
+const AssetManager = ({name}: AssetManagerProps) => {
   return (
 <div className="flex justify-between items-center mt-4">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-gray-400"></div>
                   <div>
-                    <h1 className="text-lg font-bold">Charan Teja</h1>
+                    <h1 className="text-lg font-bold">{name}</h1>
                     <p className="text-sm">Asset Manager</p>
                   </div>
                 </div>

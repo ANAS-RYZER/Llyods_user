@@ -637,6 +637,7 @@ export interface Asset {
   assetId: string;
   assetDetails: AssetDetails;
   investedAmount: number;
+  currentValue: number;
   tokens: number;
   tokenPrice: number;
   investedDate: string; // ISO date string
@@ -667,7 +668,7 @@ export interface Summary {
 export interface PortfolioResponse {
   portfolio: Portfolio;
   summary: Summary;
-
+  cashFlowBreakdown: CashFlowBreakdown;
   userId: string;
   totalValue: number;
   holdings: number;
@@ -709,6 +710,10 @@ export interface CashFlowAsset {
 
 export interface CashFlowBreakdown {
   assets: CashFlowAsset[];
+  date: string;
+  monthlyTotalValue: number;
+  monthlyCashFlows: number;
+  monthlyHoldings: number;
 }
 
 export interface PortfolioCashFlowResponse {

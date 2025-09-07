@@ -7,18 +7,23 @@ import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, CartesianGrid } fro
 import { useState } from "react"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 
-// Demo data shaped to roughly mirror the curves shown
-const performanceData = [
-  { label: "Feb 01", total: 12000, holdings: 11000, cash: 13000 },
-  { label: "Feb 05", total: 8000, holdings: 7000, cash: 11000 },
-  { label: "Feb 09", total: 22000, holdings: 21000, cash: 16000 },
-  { label: "Feb 13", total: 19000, holdings: 18500, cash: 9000 },
-  { label: "Feb 17", total: 33000, holdings: 32500, cash: 24000 },
-  { label: "Feb 21", total: 27000, holdings: 26000, cash: 22000 },
-  { label: "Feb 25", total: 41000, holdings: 40000, cash: 30000 },
-  { label: "Feb 27", total: 56000, holdings: 54000, cash: 58000 },
-  { label: "Feb 29", total: 59000, holdings: 57000, cash: 60000 },
-]
+// Function to transform API data to chart format
+function transformCashFlowData(cashFlowData: {
+  date: string
+  monthlyTotalValue: number
+  monthlyCashFlows: number
+  monthlyHoldings: number
+}) {
+  // Create data points based on the cashFlowBreakdown structure
+  return [
+    {
+      label: "Current",
+      total: cashFlowData.monthlyTotalValue,
+      holdings: cashFlowData.monthlyHoldings,
+      cash: cashFlowData.monthlyCashFlows,
+    }
+  ]
+}
 
 // Colors (4 total):
 // - Primary: #3e54eb (dark blue)
@@ -37,30 +42,40 @@ function RightAxisTick({
   x,
   y,
   payload,
-  max = 60000,
 }: {
   x?: number
   y?: number
   payload?: { value: number }
-  max?: number
 }) {
   if (x == null || y == null || !payload) return null
   const v = payload.value
-  const pct = Math.round((v / max) * 10) // 0..10 -> 0%..10%
-  // Format to £0, £30k, £60k layout
-  const currency = v >= 1000 ? `£${Math.round(v / 1000)}k` : `£${v.toLocaleString()}`
+  // Format to $0, $30k, $60k layout
+  const currency = v >= 1000 ? `$${Math.round(v / 1000)}k` : `$${v.toLocaleString()}`
   return (
     <g transform={`translate(${x},${y})`}>
       <text x={0} y={0} dy={4} textAnchor="start" fontSize={12} fill={COLORS.tick}>
         {currency}
-        <tspan dx={8}>{`${pct}%`}</tspan>
       </text>
     </g>
   )
 }
 
-export function PerformanceCard() {
+interface PerformanceCardProps {
+  cashFlowBreakdown?: {
+    date: string
+    monthlyTotalValue: number
+    monthlyCashFlows: number
+    monthlyHoldings: number
+  }
+}
+
+export function PerformanceCard({ cashFlowBreakdown }: PerformanceCardProps) {
     const [selected, setSelected] = useState('Last month');
+    
+    // Transform API data or use empty array if no data
+    const performanceData = cashFlowBreakdown 
+      ? transformCashFlowData(cashFlowBreakdown)
+      : []
   return (
     <Card className="w-full rounded-2xl border border-[#e6e6e6] bg-white shadow-sm">
       <CardHeader className="pb-2">
@@ -97,18 +112,17 @@ export function PerformanceCard() {
       <hr />
       <CardContent>
         <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={performanceData} margin={{ top: 10, right: 56, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="4 6" stroke="#e5e7eb" />
-              {/* <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: COLORS.tick, fontSize: 12 }} /> */}
-              <YAxis
-                orientation="right"
-                domain={[0, 60000]}
-                ticks={[0, 30000, 60000]}
-                axisLine={false}
-                tickLine={false}
-                tick={<RightAxisTick />}
-              />
+          {performanceData.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={performanceData} margin={{ top: 10, right: 56, left: 0, bottom: 0 }}>
+                <CartesianGrid vertical={false} strokeDasharray="4 6" stroke="#e5e7eb" />
+                <YAxis
+                  orientation="right"
+                  domain={[0, 'dataMax']}
+                  axisLine={false}
+                  tickLine={false}
+                  tick={<RightAxisTick />}
+                />
               <Line
                 type="monotone"
                 dataKey="total"
@@ -138,6 +152,11 @@ export function PerformanceCard() {
               />
             </LineChart>
           </ResponsiveContainer>
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-500">
+              No performance data available
+            </div>
+          )}
         </div>
             <hr />
         {/* Legend matching the screenshot */}

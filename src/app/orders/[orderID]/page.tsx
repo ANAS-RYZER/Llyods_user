@@ -57,7 +57,9 @@ const OrderStatus = () => {
             <hr className="my-2" />
             <div>
               <h1 className="text-xl font-bold">Support Needed?</h1>
-              <AssetManager />
+              <AssetManager 
+              name= {property?.hostedBy?.name as string}
+              />
             </div>
           </div>
           <div className="flex justify-between items-center my-5">
@@ -79,8 +81,8 @@ const OrderStatus = () => {
             className=""
             width={400}
             height={410}
-            src={`/OrderPageAd.png`}
-            alt="OrderPageAd"
+            src={`/Lloyds_mobile.png`}
+            alt="Lloyds_mobile"
           />
         </div>
       </div>
