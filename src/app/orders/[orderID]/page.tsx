@@ -73,7 +73,9 @@ const OrderStatus = () => {
               <ArrowLeft />
               View Orders
             </Button>
-            <Button>
+            <Button
+             onClick={() => router.push("/portfolio")} 
+              >
               My Portfolio <ArrowUpRight />
             </Button>
           </div>
