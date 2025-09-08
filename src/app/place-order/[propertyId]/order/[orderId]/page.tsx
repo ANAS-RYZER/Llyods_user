@@ -7,6 +7,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import LottieAnimation from "@/components/animation/LottieAnimation";
 import SignLottie from "../../../../../../public/lottie-animations/sign.json";
+import LoadingLottie from "../../../../../../public/lottie-animations/loading.json";
 
 import useFetchOrderById from "@/hooks/order/useFetchOrderById";
 import { useFetchPropertyById } from "@/hooks/property/useFetchPropertyById";
@@ -84,7 +85,7 @@ const OrderStatus = () => {
           return updated;
         });
         setCurrentStepIndex((prev) => prev + 1);
-      }, 2000); 
+      }, 5000); 
 
       return () => clearTimeout(timer);
     }
@@ -124,11 +125,19 @@ const OrderStatus = () => {
             <h1 className="text-2xl font-bold text-gray-900">
               {currentStep?.heading}
             </h1>
-            <LottieAnimation
+          {
+            currentStep.id === "document_signature" ? (
+              <LottieAnimation
               animationData={SignLottie}
               style={{ width: 60, height: 60 }}
             />
-          </div>
+            ) : (
+              <LottieAnimation
+              animationData={LoadingLottie}
+              style={{ width: 60, height: 60 }}
+            />
+            )}
+            </div>
 
           <div className="mt-8">
             {loading || !steps ? (

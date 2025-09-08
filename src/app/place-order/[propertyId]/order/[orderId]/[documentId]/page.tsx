@@ -29,7 +29,7 @@ const DocumentPage = () => {
     
     // Use window.location.href for a full page reload to ensure fresh data
     // This is more reliable than router.push for ensuring data is refreshed
-    window.location.href = `/place-order/${propertyId}/order/${orderId}`;
+    window.location.href = `/orders/${orderId}`;
   }
   return (
     <section className="flex flex-col">

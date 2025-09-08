@@ -239,7 +239,7 @@ const Header = () => {
 
           {userData &&
             !userData?.kycCompleted &&
-            userData?.country !== "India" && (
+            (
               <Button
                 className="px-6 bg-white hover:bg-white/80 text-primary"
                 onClick={handleVeriffSession}

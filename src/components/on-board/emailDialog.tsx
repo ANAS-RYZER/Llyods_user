@@ -128,7 +128,7 @@ export default function EmailDialog({ open, onOpenChange, onSubmit: submit }: Em
 
                                 <div className="flex items-start justify-start gap-2 ">
                                     <SignInGoogleButton
-                                        apiUrl="https://backend.ryzer.app/api/auth/login-with-google"
+                                        apiUrl="https://backendlloyd.ryzer.app/api/auth/login-with-google"
                                         onSuccess={() => {
                                             onOpenChange(false);
                                         }}

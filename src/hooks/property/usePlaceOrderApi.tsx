@@ -21,7 +21,6 @@ const usePlaceOrderApi = () => {
     setError(null); // Reset error state before making the request
     try {
       const response = await api.post(`/orders?assetId=${propertyID}`, order);
-      toast.success("Order Placed Successfully")
       return response.data.data;
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message || 'Failed to place order';
