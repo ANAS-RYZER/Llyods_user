@@ -123,7 +123,7 @@ export default function MyAssetsTable({ assets }: { assets: ApiAsset[] }) {
         </h2>
         <Button
           onClick={() => {
-            router.push("https://llyods-user.vercel.app/?assetCategory=all");
+            router.push("/");
           }}
         >
           Explore Tokenized assets
