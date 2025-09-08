@@ -12,7 +12,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
   const fiat_types = [
     {
       value: "my_lloyds_saving_account",
-      image: "/LlyodsLogo.svg",
+      image: "/lloydslogo.svg",
       name: "My Lloyds Saving Account",
       note: "319***19",
       price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
@@ -20,7 +20,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
     },
     {
       value: "my_lloyds_credit_card",
-      image: "/LlyodsLogo.svg",
+      image: "/lloydslogo.svg",
       name: "My Lloyds Credit Card",
       note: "6379********9656",
       price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
