@@ -3,7 +3,7 @@ export default function Head() {
       <>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
-        <link rel="apple-touch-icon" href="/LLyodsLogo.svg" />
+        <link rel="apple-touch-icon" href="/lloydslogo.svg" />
       </>
     );
   }

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: "Lloyds Orders",
   icons: {
     icon: [
-      { rel: 'icon', type: 'image/svg+xml', url: '/LLyodsLogo.svg' },
+      { rel: 'icon', type: 'image/svg+xml', url: '/lloydslogo.svg' },
     ]
   },
   manifest: "/manifest.json",
