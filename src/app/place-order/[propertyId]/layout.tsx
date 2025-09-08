@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "DEMOCRATISING CONTENT IP INVESTMENTS. Don't just Consume Content, Co-Own it",
   icons: {
-    icon: [{ rel: "icon", type: "image/svg+xml", url: "/LLyodsLogo.svg" }],
+    icon: [{ rel: "icon", type: "image/svg+xml", url: "/lloydslogo.svg" }],
   },
 };
 

@@ -84,7 +84,7 @@ export default function CustomerDetailsDialog({
                     {/* Left */}
                     <div className="flex flex-col space-y-6 w-full max-w-md">
                         <Image
-                            src="/LLyodsLogo.svg"
+                            src="/lloydslogo.svg"
                             alt="Llyods Logo"
                             width={120}
                             height={120}
