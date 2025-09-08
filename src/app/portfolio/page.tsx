@@ -1,9 +1,11 @@
+import MyAccount from "./components/MyAccount"
 import PortfolioDashboard from "./components/PortfolioDashBoard"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#f7f9fd]">
-      <PortfolioDashboard />
+      {/* <PortfolioDashboard /> */}
+      <MyAccount/>
     </div>
   )
 }

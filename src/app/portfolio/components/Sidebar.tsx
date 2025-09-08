@@ -27,13 +27,14 @@ const Sidebar = () => {
     { name: "Portfolio", path: "/portfolio", icon: ChartNoAxesCombined },
     { name: "My Wallets", path: "/portfolio/wallets", icon: Wallet },
     { name: "My Rewards", path: "/portfolio/rewards", icon: Gift },
-    { name: "New Deals", path: "/portfolio/new-deals", icon: Briefcase },
-    { name: "Community Clubs", path: "/portfolio/community", icon: Users },
-    {
-      name: "Knowledge Base",
-      path: "/portfolio/knowledge-base",
-      icon: BookCopy,
-    },
+    // { name: "New Deals", path: "/portfolio/new-deals", icon: Briefcase },
+    // { name: "Community Clubs", path: "/portfolio/community", icon: Users },
+    { name: "Tokenize my asset", icon: BookCopy},
+    // {
+    //   name: "Knowledge Base",
+    //   path: "/portfolio/knowledge-base",
+    //   icon: BookCopy,
+    // },
     { name: "Support", path: "/portfolio/support", icon: Headset },
     { name: "Settings", path: "/portfolio/settings", icon: Settings },
     { name: "Logout", icon: LogOut },
@@ -51,6 +52,9 @@ const Sidebar = () => {
       }, 1000);
     };
 
+    const handleTokenizeMyAsset = () =>{
+      router.push("https://llyods-admin.vercel.app/")
+    }
   return (
     <div className="w-60 min-h-screen shadow-sm border-r px-2 py-4 bg-[#1D1C21] rounded-tr-3xl">
       <h1 className="text-white mb-3">My Dashboard</h1>
@@ -64,6 +68,21 @@ const Sidebar = () => {
                 <li key={item.name}>
                   <button
                     onClick={handleLogout}
+                    className="flex items-center gap-5 py-2 rounded-lg text-white hover:text-muted-foreground w-full text-left"
+                  >
+                    <div className="p-2 rounded-full">
+                      <Icon size={20} />
+                    </div>
+                    {item.name}
+                  </button>
+                </li>
+              );
+            }
+            if (item.name === "Tokenize my asset") {
+              return (
+                <li key={item.name}>
+                  <button
+                    onClick={handleTokenizeMyAsset}
                     className="flex items-center gap-5 py-2 rounded-lg text-white hover:text-muted-foreground w-full text-left"
                   >
                     <div className="p-2 rounded-full">

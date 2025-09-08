@@ -18,7 +18,7 @@ const WhatsHappening = () => {
         <p className="text-sm text-black/70">
           Free cancellation before 15 August. cancel before 16 August to <br />
           get partial refund.{" "}
-          <span className="text-md text-[#735aed] underline cursor-pointer">
+          <span className="text-md text-primary underline cursor-pointer">
             Learn more
           </span>
         </p>
@@ -43,7 +43,7 @@ const WhatsHappening = () => {
               </p>
             </div>
           </div>
-          <Button variant="ghost" className="bg-none text-[#735aed] text-md ">
+          <Button variant="ghost" className="bg-none text-primary text-md ">
             <CirclePlay className="h-10 w-10" />
             Watch now
           </Button>

@@ -92,7 +92,7 @@ const PropertyHeader: React.FC<PropertyHeaderProps> = ({
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-full bg-gray-400"></div>
               <div>
-                <h1 className="text-lg font-bold">{managerName}</h1>
+                <h1 className="text-lg font-bold truncate">{managerName}</h1>
                 <p className="text-sm">{managerRole}</p>
               </div>
             </div>

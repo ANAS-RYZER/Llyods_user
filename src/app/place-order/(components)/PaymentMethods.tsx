@@ -44,7 +44,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
         <h1 className="text-gray-500 font-medium tracking-wide">
           Payment methods
         </h1>
-        <h1 className="text-xl font-semibold flex items-center gap-2">
+        <h1 className="text-xl font-semibold flex items-center gap-2\">
           £{totalOrderValue.toLocaleString("en-US")}
           <span>
             <InfoIcon

@@ -9,10 +9,10 @@ export default function Banner({
   description,
 }: {
   icon: React.ReactNode;
-  bgColor: string;
-  title: string;
-  description: string;
-  textColor: string;
+  bgColor?: string;
+  title?: string;
+  description?: string;
+  textColor?: string;
 }) {
   return (
     <div

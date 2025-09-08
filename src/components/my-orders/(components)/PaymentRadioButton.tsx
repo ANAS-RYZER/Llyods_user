@@ -42,7 +42,7 @@ const PaymentRadioButton = ({
         }`}
       >
         <div className="flex items-center gap-4">
-          <RadioGroupItem value={value} id={value} />
+          <RadioGroupItem value={value} id={value} defaultValue = "my_lloyds_saving_account" />
           <Image src={image} alt={name} width={40} height={40} />
           <Label htmlFor={value} className="cursor-pointer">
             <h1 className="text-lg font-semibold tracking-wide">{name}</h1>

@@ -11,10 +11,18 @@ import PaymentRadioButton from "./PaymentRadioButton";
 const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
   const fiat_types = [
     {
-      value: "square_up",
-      image: "/square-logo.png",
-      name: "Square Up",
-      note: "For Indian users only",
+      value: "my_lloyds_saving_account",
+      image: "/LlyodsLogo.svg",
+      name: "My Lloyds Saving Account",
+      note: "319***19",
+      price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
+      fee: "Platform fee (0.1%)",
+    },
+    {
+      value: "my_lloyds_credit_card",
+      image: "/LlyodsLogo.svg",
+      name: "My Lloyds Credit Card",
+      note: "6379********9656",
       price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
       fee: "Platform fee (0.1%)",
     },
@@ -22,14 +30,6 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
       value: "stripe",
       image: "/stripelogo.svg",
       name: "Stripe",
-      note: "For Global users",
-      price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
-      fee: "Platform fee (0.1%)",
-    },
-    {
-      value: "checkout",
-      image: "/checkout-logo.jpeg",
-      name: "Checkout",
       note: "For Global users",
       price: ` £${totalOrderValue.toLocaleString("en-IN")}`,
       fee: "Platform fee (0.1%)",
@@ -58,7 +58,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
       fee: "-10000",
     },
   ];
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState("my_lloyds_saving_account");
   useEffect(() => {
     console.log(selected);
   }, [selected]);
@@ -69,8 +69,7 @@ const PaymentMethods = ({ totalOrderValue }: { totalOrderValue: number }) => {
           Payment methods
         </h1>
         <h1 className="text-xl font-semibold flex items-center gap-2">
-          <PoundSterling />
-          {totalOrderValue.toLocaleString("en-IN")}
+          £ {totalOrderValue.toLocaleString("en-US")}
           <span>
             <InfoIcon
               tooltip="dummy data"

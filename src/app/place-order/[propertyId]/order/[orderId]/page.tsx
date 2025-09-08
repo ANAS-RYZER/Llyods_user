@@ -2,7 +2,7 @@
 
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import LottieAnimation from "@/components/animation/LottieAnimation";
@@ -33,46 +33,70 @@ const OrderStatus = () => {
     if (orderId) fetchOrder(orderId as string);
   }, [orderId]);
 
-  const steps = useMemo(
-    () => [
-      {
-        id: "order_submitted",
-        title: "Order Submitted",
-        heading: "We're verifying your order, hang tight!",
-        completed: true,
-        component: <WhatsHappening />,
-      },
-      {
-        id: "payment_confirmation",
-        title: "Payment Confirmation",
-        heading: "We're verifying your payment, hang tight!",
-        completed: true,
-        component: <WhatsHappening />,
-      },
-      {
-        id: "token_transfers",
-        title: "Token Transfers",
-        heading: "We're transferring tokens to your wallet, hang tight!",
-        completed: true,
-        component: <WhatsHappening />,
-      },
-      {
-        id: "document_signature",
-        title: "Document Signature",
-        heading: "Final Step: Sign & Complete Your Investment",
-        completed: false,
-        component: order ? (
-          <DocumentSignature order={order} />
-        ) : (
-          <DocumentSignatureSkeleton />
-        ),
-      },
-    ],
-    [order]
+  const baseSteps = [
+  {
+    id: "order_submitted",
+    title: "Order Submitted",
+    active_text: "Verifying Order", 
+    heading: "We're verifying your order, hang tight!",
+    component: <WhatsHappening />,
+  },
+  {
+    id: "payment_confirmation",
+    title: "Payment Confirmation",
+    active_text: "Verifying Payment", 
+    heading: "We're verifying your payment, hang tight!",
+    component: <WhatsHappening />,
+  },
+  {
+    id: "token_transfers",
+    title: "Token Transfers",
+    active_text: "Transferring Tokens", 
+    heading: "We're transferring tokens to your wallet, hang tight!",
+    component: <WhatsHappening />,
+  },
+  {
+    id: "document_signature",
+    title: "Document Signature",
+    heading: "Final Step: Sign & Complete Your Investment",
+    component: order ? (
+      <DocumentSignature order={order} />
+    ) : (
+      <DocumentSignatureSkeleton />
+    ),
+  },
+];
+
+
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [completedSteps, setCompletedSteps] = useState<boolean[]>(
+    Array(baseSteps.length).fill(false) 
   );
 
-  const currentStepId = "document_signature";
-  const currentStep = steps.find((step) => step.id === currentStepId);
+  useEffect(() => {
+    if (!baseSteps.length) return;
+
+    if (currentStepIndex < baseSteps.length - 1) {
+      const timer = setTimeout(() => {
+        setCompletedSteps((prev) => {
+          const updated = [...prev];
+          updated[currentStepIndex] = true; 
+          return updated;
+        });
+        setCurrentStepIndex((prev) => prev + 1);
+      }, 2000); 
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentStepIndex, baseSteps.length]);
+
+  
+  const steps = baseSteps.map((step, index) => ({
+    ...step,
+    completed: completedSteps[index],
+  }));
+
+  const currentStep = steps[currentStepIndex];
 
   const handleViewOnBlockchain = () => {
     const address = property?.tokenInformation?.blockchainProjectAddress;
@@ -107,12 +131,12 @@ const OrderStatus = () => {
           </div>
 
           <div className="mt-8">
-            {loading || !steps || !currentStepId ? (
+            {loading || !steps ? (
               <StepperSkeleton count={steps.length} />
             ) : (
               <Stepper
                 steps={steps}
-                currentStepId={currentStepId}
+                currentStepId={currentStep.id}
               />
             )}
           </div>

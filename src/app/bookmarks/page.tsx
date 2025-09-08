@@ -26,9 +26,9 @@ const BookmarksContent = () => {
       <BookmarkSearch onSearch={() => {}} searchQuery={""} />
 
       <div className="flex items-center justify-start mt-10">
-        <Bookmark size={25} className="text-[#725ACE] mr-2" />
+        <Bookmark size={25} className="text-primary mr-2" />
         <h1 className="text-2xl font-bold">Your Bookmarks</h1>
-        <span className="bg-[#725ACE]/20 text-[#725ace] px-2 py-0 rounded-full ml-2">
+        <span className="bg-[#725ACE]/20 text-primary px-2 py-0 rounded-full ml-2">
           {" "}
           {properties?.length}{" "}
         </span>

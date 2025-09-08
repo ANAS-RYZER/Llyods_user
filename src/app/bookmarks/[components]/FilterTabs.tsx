@@ -45,7 +45,7 @@ const FilterTabs = () => {
           onClick={() => handleTabChange(item.id)}
           className={`${
             activeTab === item.id
-              ? "bg-violet-500 text-white"
+              ? "bg-green-500 text-white"
               : "text-black bg-white border-black"
           } min-w-max flex flex-col items-center justify-center hover:text-white`}
         >
