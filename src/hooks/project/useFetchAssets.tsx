@@ -33,9 +33,10 @@ export const useFetchAllAssets = (page = 1, limit = 5, sort?: string , searchQue
     const fetchProjects = async () => {
       setLoading(true);
       try {
+        const investorId = sessionStorage.getItem("userId")
         const categoryQuery = assetCategory ? `category=${assetCategory}` : '';
         const nameQuery = searchQuery ? `&search=${searchQuery}` : '';
-        const url = `/assets/real-estate?${categoryQuery}&page=${Number(page)}&limit=${Number(limit)}${nameQuery}${bookmark ? `&bookmarked=${bookmark}` : ''}`;
+        const url = `/assets/real-estate?${investorId ? `&investorId=${investorId}` : ''}${categoryQuery}&page=${Number(page)}&limit=${Number(limit)}${nameQuery}${bookmark ? `&bookmarked=${bookmark}` : ''}`;
         
         const projectsResponse = await api.get(url);
         setProjects(projectsResponse.data.data);

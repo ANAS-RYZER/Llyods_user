@@ -52,6 +52,9 @@ const UserDropDown = ({ user }: { user: any }) => {
   const displayAvatar = avatar || user?.avatar;
   const displayName = name || user?.firstName || "User";
 
+  sessionStorage.setItem("userId", user?._id);
+
+
   const handleLogout = () => {
     setLoggingOut(true);
     sessionStorage.clear();
