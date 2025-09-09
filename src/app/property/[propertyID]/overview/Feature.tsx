@@ -75,10 +75,10 @@ const Feature: React.FC<Props> = ({ features, amenities }) => {
             icon={<Building size={16} className="text-gray-600" />}
         >
             <Tabs defaultValue="features" className="w-full">
-                <TabsList className="w-full border-b  border-gray-200 bg-white rounded-none">
+                <TabsList className="w-full border-b flex  border-gray-200 bg-white rounded-none">
                     <TabsTrigger
                         value="features"
-                        className="w-1/2 text-black rounded-none -mb-2 flex justify-center items-center
+                        className="flex-1 text-black rounded-none -mb-2 flex justify-center items-center
                 data-[state=active]:text-primary
                 data-[state=active]:bg-transparent
                 data-[state=active]:shadow-none
@@ -89,7 +89,7 @@ const Feature: React.FC<Props> = ({ features, amenities }) => {
                     </TabsTrigger>
                     <TabsTrigger
                         value="amenities"
-                        className="w-1/2 text-black rounded-none -mb-2 flex justify-center items-center
+                        className="flex-1 text-black rounded-none -mb-2 flex justify-center items-center
                 data-[state=active]:text-primary
                 data-[state=active]:bg-transparent
                 data-[state=active]:shadow-none
