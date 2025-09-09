@@ -11,17 +11,14 @@ import { useEffect, useState } from "react";
 const DocumentSignature = ({ order: orderData }: any) => {
   const router = useRouter();
   const { propertyId, orderId } = useParams();
-  const [investorId, setInvestorId] = useState<string | null>(null);
+  const investorId = sessionStorage.getItem("userId");
 
   const [documents, setDocuments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedInvestorId = sessionStorage.getItem("userId");
-      setInvestorId(storedInvestorId);
-    }
-  }, []);
+  console.log(orderData?.documents, "orderData");
+  console.log("propertyId from params:", propertyId);
+  console.log("orderId from params:", orderId);
+  console.log("investorId:", investorId);
 
   useEffect(() => {
     const fetchDocs = async () => {
@@ -43,9 +40,23 @@ const DocumentSignature = ({ order: orderData }: any) => {
           return;
         }
 
+        // Get propertyId from order data if not available in params
+        const assetId = propertyId || orderData?.asset?._id;
+        const currentOrderId = orderId || orderData?._id;
+        
+        console.log("Using assetId:", assetId);
+        console.log("Using orderId:", currentOrderId);
+
+        if (!assetId || !investorId || !currentOrderId) {
+          console.warn("DocumentSignature - Missing required parameters:", { assetId, investorId, currentOrderId });
+          setDocuments([]);
+          setLoading(false);
+          return;
+        }
+
         // 2. Get existing signature tracking
         const trackRes = await api.get(
-          `/investor-document-signature-tracking/single?assetId=${propertyId}&investorId=${investorId}&orderId=${orderId}`
+          `/investor-document-signature-tracking/single?assetId=${assetId}&investorId=${investorId}&orderId=${currentOrderId}`
         );
         const trackData = trackRes.data.data as IInvestorDocumentSignature[];
         const trackingMap = new Map(
@@ -67,7 +78,7 @@ const DocumentSignature = ({ order: orderData }: any) => {
               const createRes = await api.post(
                 `/investor-document-signature-tracking`,
                 {
-                  assetId: propertyId,
+                  assetId: assetId,
                   documentTemplateId: doc._id,
                 }
               );
@@ -85,26 +96,36 @@ const DocumentSignature = ({ order: orderData }: any) => {
         );
 
         const validDocs = mergedDocs.filter((doc) => doc !== null);
-        console.log(
-          "DocumentSignature - validDocs after processing:",
-          validDocs
-        );
+   
         setDocuments(validDocs);
       } catch (error) {
         console.error("Error fetching documents:", error);
-        setDocuments([]);
+        // Fallback: show documents without signature tracking if API fails
+        console.log("Falling back to show documents without signature tracking");
+        const fallbackDocs = orderData?.documents?.map((doc: any) => ({
+          ...doc,
+          signatureTracking: {
+            trackingId: null,
+            investorDetails: null,
+            submissionDocumentURL: null
+          }
+        }));
+        setDocuments(fallbackDocs);
       } finally {
         setLoading(false);
       }
     };
 
-    if (propertyId && investorId) {
+    const assetId = propertyId || orderData?.asset?._id;
+    const currentOrderId = orderId || orderData?._id;
+    
+    if (assetId && investorId && currentOrderId) {
       fetchDocs();
     } else {
-      console.warn("DocumentSignature - Missing propertyId or investorId");
+      console.warn("DocumentSignature - Missing required parameters:", { assetId, investorId, currentOrderId });
       setLoading(false);
     }
-  }, [propertyId, investorId, orderData]);
+  }, [propertyId, orderId, investorId, orderData]);
 
   if (loading) return <DocumentSignatureSkeleton />;
 
@@ -175,8 +196,10 @@ const DocumentSignature = ({ order: orderData }: any) => {
                   );
                 } else if (doc.signatureTracking?.investorDetails?.slug) {
                   // Already sent → open signing page
+                  const assetId = propertyId || orderData?.asset?._id;
+                  const currentOrderId = orderId || orderData?._id;
                   router.push(
-                    `/place-order/${propertyId}/order/${orderId}/${doc.signatureTracking.investorDetails.slug}`
+                    `/place-order/${assetId}/order/${currentOrderId}/${doc.signatureTracking.investorDetails.slug}`
                   );
                 } else {
                   // Not sent yet → send first
@@ -190,21 +213,23 @@ const DocumentSignature = ({ order: orderData }: any) => {
                     const res = await sendForSignature(trackingId);
                     const slug = res?.data?.data.investorDetails.slug;
                     // Redirect after sending
+                    const assetId = propertyId || orderData?.asset?._id;
+                    const currentOrderId = orderId || orderData?._id;
                     router.push(
-                      `/place-order/${propertyId}/order/${orderId}/${slug}`
+                      `/place-order/${assetId}/order/${currentOrderId}/${slug}`
                     );
                   } catch (err) {
                     console.error("Error sending document", err);
                   }
                 }
               }}
-              className="  border-2 border-[#0eb57b] text-[#0eb57b] hover:text-white hover:bg-primary"
+              className="  border-2 border-primary     text-primary hover:text-white hover:bg-primary"
             >
               {isSigned
                 ? "Download"
                 : doc.signatureTracking?.investorDetails?.slug
-                ? "Sign"
-                : "Send & Sign"}
+                ? "Sign Now"
+                : "Sign Now "}
             </Button>
           </div>
         );

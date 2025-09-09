@@ -12,6 +12,7 @@ import Image from "next/image";
 import AssetManager from "./(components)/AssetManager";
 import useFetchOrderById from "@/hooks/order/useFetchOrderById";
 import PropertyHeader from "@/components/my-orders/(components)/PropertyHeader";
+import DocumentSignature from "@/components/my-orders/(components)/DocumentSignature";
 
 const OrderStatus = () => {
   const params = useParams();
@@ -51,9 +52,10 @@ const OrderStatus = () => {
 
       <div className="flex justify-center gap-3 items-center">
         <div className="w-[39%]">
-          <div className="w-full shadow border rounded-lg p-4">
+          <div className="w-full shadow border rounded-lg p-4 space-y-4">
             <TokenStatus status={order?.currentStatus} />
             <OrderDetails property={property} order={order} />
+            <DocumentSignature order={order} />
             <hr className="my-2" />
             <div>
               <h1 className="text-xl font-bold">Support Needed?</h1>
@@ -71,7 +73,9 @@ const OrderStatus = () => {
               <ArrowLeft />
               View Orders
             </Button>
-            <Button>
+            <Button
+             onClick={() => router.push("/portfolio")} 
+              >
               My Portfolio <ArrowUpRight />
             </Button>
           </div>

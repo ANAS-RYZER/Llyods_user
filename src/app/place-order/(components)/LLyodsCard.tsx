@@ -19,7 +19,7 @@ const LLyodsCard: React.FC<LLyodsCardProps> = ({ add, onToggle }) => {
     <div className="space-y-5">
       <div className="flex justify-between items-center ">
         <div className="flex items-center gap-3">
-          <Image src={`/LLyodsLogo.svg`} alt="" width={40} height={40} />
+          <Image src={`/lloydslogo.svg`} alt="" width={40} height={40} />
           <h1 className="text-lg font-semibold">Insurance Rental protection</h1>
           {add && (
             <div className="flex text-white bg-[#13ba82] rounded-full px-3 py-1 gap-3 text-sm items-center">

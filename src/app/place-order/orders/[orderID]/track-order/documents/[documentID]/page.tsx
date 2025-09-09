@@ -14,8 +14,6 @@ const DocumentPage = () => {
   const orderID = params?.orderID as string;
   const router = useRouter();
   const {data: userData, loading, error} = useUserDetails();
-  console.log("User Email: ", userData?.email);
-
 
   useEffect(() => {
     if (!documentID) {

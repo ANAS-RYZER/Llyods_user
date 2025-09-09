@@ -29,7 +29,7 @@ export default function UserEntryDialog({ open, onOpenChange, onContinue , name 
       <DialogContent className="w-full max-w-[450px] p-4 rounded-xl" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold" >
-              <Image src="/LLyodsLogo.svg" alt="Lloyds Logo" width={120} height={120} />
+              <Image src="/lloydslogo.svg" alt="Lloyds Logo" width={120} height={120} />
             </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col  items-center justify-center">

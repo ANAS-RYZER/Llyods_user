@@ -130,7 +130,7 @@ const UserDropDown = ({ user }: { user: any }) => {
             {isFinancialsOpen && (
               <div className="bg-gray-100 mx-1 rounded-md">
                 <DropdownMenuItem
-                  onClick={() => router.push("/portfolio/wallet")}
+                  onClick={() => router.push("/portfolio/wallets")}
                   className="cursor-pointer pl-8 py-2"
                 >
                   <CreditCard className="mr-2 h-4 w-4" />

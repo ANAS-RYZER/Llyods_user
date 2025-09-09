@@ -91,6 +91,7 @@ const PropertyPage = () => {
     params?.propertyID as string
   );
   const { fetchData, data } = useInvestorApi();
+  console.log("property",property)
 
   if (loading) {
     return (
@@ -113,11 +114,11 @@ const PropertyPage = () => {
       </div>
       <div className="w-full flex lg:items-start lg:justify-between gap-5 lg:mt-8 mt-0 flex-col-reverse lg:flex-row mx-auto">
         <Tabs defaultValue="growth" className="lg:w-[900px]">
-          <TabsList className="sticky h-auto z-10 top-0  w-full overflow-x-auto scrollbar-hidden backdrop-blur-lg rounded-none bg-[#EEF2FF]/70   mb-2 p-1">
+          <TabsList className="sticky h-auto flex z-10 top-0  w-full overflow-x-auto scrollbar-hidden backdrop-blur-lg rounded-none bg-[#EEF2FF]/70   mb-2 p-1">
             <div className="hidden p-0 lg:flex w-full justify-between items-center">
               <TabsTrigger
                 value="growth"
-                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 flex-1 py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <ChartColumn size={16} />
@@ -129,7 +130,7 @@ const PropertyPage = () => {
 
               <TabsTrigger
                 value="overview"
-                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 flex-1 py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <ChartLine size={16} />
@@ -141,7 +142,7 @@ const PropertyPage = () => {
 
               <TabsTrigger
                 value="documents"
-                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 flex-1 py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <FileText size={16} />
@@ -153,7 +154,7 @@ const PropertyPage = () => {
 
               <TabsTrigger
                 value="faqs"
-                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 w-1/4 min-w-max py-2 m-0.5 transition-all duration-500 linear"
+                className=" data-[state=active]:bg-[#0eb57b] data-[state=active]:shadow-none data-[state=active]:text-white  text-base flex items-center gap-2 flex-1 py-2 m-0.5 transition-all duration-500 linear"
               >
                 <p className="flex items-center gap-2">
                   <MessagesSquare size={16} />
@@ -208,7 +209,7 @@ const PropertyPage = () => {
               />
             </TabsContent>
 
-            <TabsContent value="overview" className="mt-0 space-y-6">
+            <TabsContent value="overview" className="mt-0 space-y-6 max-w-[700px]">
               <About description={property.about || ""} />
               <Feature
                 features={property.features || []}
@@ -217,7 +218,7 @@ const PropertyPage = () => {
               <HostedBy hostedBy={property.hostedBy || {}} />
               <DueDeligance dueDiligence={property?.dueDiligence || {}} />
               <NearByLocation
-                nearByLocations={property.nearByLocations || []}
+                nearByLocations={property?.nearByLocations || []}
                 name={property.name || ""}
                 lat={property.latitude || 0}
                 lng={property.longitude || 0}
